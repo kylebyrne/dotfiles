@@ -63,6 +63,8 @@ set smartcase
 """""""""""""""""""
 " PLUGIN SETTINGS "
 """""""""""""""""""
+" Use deoplete.
+let g:deoplete#enable_at_startup = 1
 
 " vim-test remap
 map <Leader>r :TestFile<CR>
