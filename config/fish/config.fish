@@ -13,11 +13,19 @@ set -x  RUBY_GC_HEAP_FREE_SLOTS 600000
 set -x  RUBY_GC_HEAP_GROWTH_FACTOR 1.25
 set -x  RUBY_GC_HEAP_GROWTH_MAX_SLOTS 300000
 
-# make Vim the default editor
-set --export EDITOR "nvim"
+# # make Vim the default editor
+# set --export EDITOR "nvim"
 
-# make Vim usable with git
-set --export GIT_EDITOR "nvim"
+# # make Vim usable with git
+# set --export GIT_EDITOR "nvim"
+#
+if  set -q NVIM_LISTEN_ADDRESS
+  set --export GIT_EDITOR "nvr -cc split --remote-wait +'set bufhidden=wipe'"
+  set --export EDITOR "nvr -cc split --remote-wait +'set bufhidden=wipe'"
+else
+  set --export GIT_EDITOR "nvim"
+  set --export EDITOR "nvim"
+end
 
 function fishrc
   cd ~/.config/fish
