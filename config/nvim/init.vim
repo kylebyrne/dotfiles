@@ -1,120 +1,74 @@
-" Specify a directory for plugins
-" - For Neovim: ~/.local/share/nvim/plugged
-" - Avoid using standard Vim directory names like 'plugin'
-call plug#begin('~/.vim/plugged')
 
-Plug 'tpope/vim-sensible'
+" Load plugins
+" ----------------------------------------------------------------------
 
-" language support
-Plug 'mxw/vim-jsx'
-Plug 'pangloss/vim-javascript'
-Plug 'tpope/vim-bundler'
-Plug 'tpope/vim-haml'
-Plug 'tpope/vim-rails'
-Plug 'tpope/vim-rake'
-Plug 'dag/vim-fish'
-Plug 'vim-ruby/vim-ruby'
-Plug 'digitaltoad/vim-pug'
-
-" prettyness
-Plug 'zeis/vim-kolor'
-Plug 'itchyny/lightline.vim'
-
-" the rest
-Plug 'kien/ctrlp.vim'
-Plug 'mileszs/ack.vim'
-Plug 'rizzatti/dash.vim'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-endwise'
-Plug 'tpope/vim-surround'
-Plug 'scrooloose/nerdtree'
-Plug 'janko-m/vim-test'
-Plug 'w0rp/ale'
-
-" Initialize plugin system
-call plug#end()
+" Load plugin file …
+exec 'source ~/.config/nvim/plugins.vim'
+" … and execute
+call VimrcLoadPlugins()
 
 set nocompatible
+
+"""""""""""
+" THEMING "
+"""""""""""
+exec 'source ~/.config/nvim/theme.vim'
+" … and execute
+call VimrcLoadTheme()
 
 "
 """"""""""""""""""""""""
 " GENERAL VIM SETTINGS "
 """"""""""""""""""""""""
 
-" change leader to space
-let mapleader = " "
+let mapleader = " "                   " change leader to space
 let maplocalleader = " "
 
-" resource mapping
+set noswapfile                        "Fuck swp files
+
 map <leader>s :source ~/.vimrc<CR>
-" nmap <silent> t<C-f> :TestFile<CR>
-map <Leader>r :TestFile<CR>
-nnoremap <Leader>t :CtrlP <CR>
-nnoremap <Leader>f :Ack ''<left>
 
-" make ack.vim use the thesilversearcher
-let g:ackprg="ag --nogroup --nocolor --column"
+set clipboard+=unnamedplus            " use the system clipboard
 
-" use the system clipboard
-"
-set clipboard+=unnamedplus
-"enable filetype detection
-filetype on
-
-set backspace=indent,eol,start
-
-"Fuck swp files
-set noswapfile
-set number
-
-" allow unsaved background buffers and remember marks/undo for them
-set hidden
-
-" remember more commands and search history
-set history=10000
-
-"Handle splitting and navigating splits
-set splitright
+set splitright                        "Handle splitting and navigating splits
 set splitbelow
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
-"Use TAB to complete when typing words, else inserts TABs as usual.
-"Uses dictionary and source files to find matching words to complete.
-function! Tab_Or_Complete()
-  if col('.')>1 && strpart( getline('.'), col('.')-2, 3 ) =~ '^\w'
-    return "\<C-N>"
-  else
-    return "\<Tab>"
-  endif
-endfunction
-:inoremap <Tab> <C-R>=Tab_Or_Complete()<CR>
-:set dictionary="/usr/dict/words"
+set number                            " show line numbers
+set hidden                            " Keep unsaved files open in buffers w/o the need to write
 
-" make searches case-sensitive only if they contain upper-case characters
-set ignorecase smartcase
-
-filetype indent on
-
-"formatting
-set nowrap
+filetype indent on                    "formatting
 set tabstop=2
-set expandtab
+set softtabstop=2
 set shiftwidth=2
+set expandtab
+set copyindent
 set smartindent
-set autoindent
-autocmd BufWritePre * :%s/\s\+$//e
-set showmatch
-set wildignore+=*.log,*.cache
-let g:gitgutter_sign_column_always=1
-set hlsearch
+set nowrap
 
+set number relativenumber             " turn hybrid line numbers on
+
+set scrolloff=3                       " keep more context when scrolling off the end of a buffer
+
+"searching
+set ignorecase
+set smartcase
+" Escape cleans the search highlight
+:nnoremap <ESC> :nohlsearch<cr>
+
+"
 """""""""""""""""""
-" CTRL P Settings "
+" PLUGIN SETTINGS "
 """""""""""""""""""
 
+" vim-test remap
+map <Leader>r :TestFile<CR>
+
+" ctrlp but like ctrl
+nnoremap <Leader>t :CtrlP <CR>
 let g:ctrlp_max_files=0
 let g:ctrlp_max_depth=40
 
@@ -124,31 +78,15 @@ let g:ctrlp_use_caching = 0
 
 let g:ctrlp_custom_ignore = '\v[\/](node_modules|target|dist)|(\.(swp|ico|git|svn))$'
 
+" Ack
+nnoremap <Leader>f :Ack ''<left>
+" make ack.vim use the thesilversearcher
+let g:ackprg="ag --nogroup --nocolor --column"
 
-"""""""""""""""""""
-" PRETTINESS "
-"""""""""""""""""""
-
-" Set color scheme
-colorscheme kolor
-syntax on
-set noshowmode
-
-"""""""""""""""""""""
-" NERDtree Settings "
-"""""""""""""""""""""
-
-let NERDTreeMapActivateNode='<right>'
+" Nerdtree
 nmap <leader>n :NERDTreeToggle<CR>
 let NERDTreeIgnore=['\.DS_Store', '\~$', '\.swp']
-if !has('gui_running')
-  set t_Co=256
-endif
 let NERDTreeShowHidden = 1
-let NERDTreeIgnore = ['\DS_Store$']
-let g:NERDTreeNodeDelimiter = "\u00a0"
-
-autocmd VimEnter * wincmd p
 
 """""""""""""""""""""
 " Terminal Settings "
@@ -176,7 +114,4 @@ endfunc
 for dir in ["h", "j", "l", "k"]
     call s:mapMoveToWindowInDirection(dir)
 endfor
-
-set foldmethod=syntax
-set nofoldenable
 
