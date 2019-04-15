@@ -65,7 +65,15 @@ set smartcase
 """""""""""""""""""
 " Use deoplete.
 let g:deoplete#enable_at_startup = 1
+let g:LanguageClient_serverCommands = {
+        \ 'ruby': ['solargraph', 'stdio'],
+        \ }
+autocmd FileType ruby setlocal omnifunc=LanguageClient#complete
+set completeopt-=preview
 
+inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+
+nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
 " vim-test remap
 map <Leader>r :TestFile<CR>
 

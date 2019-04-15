@@ -17,7 +17,13 @@ function! VimrcLoadPlugins()
   " Enhanced terminal integration
   Plug 'wincent/terminus'
   " Autocompletion
-  Plug 'Shougo/deoplete.nvim'
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+	Plug 'uplus/deoplete-solargraph'
+	Plug 'autozimu/LanguageClient-neovim', {
+			\ 'branch': 'next',
+			\ 'do': 'bash install.sh',
+			\ }
+
   " Wrapper of some neovim's :terminal functions
   Plug 'kassio/neoterm'
   " Plugin to help you stop repeating the basic movement keys
