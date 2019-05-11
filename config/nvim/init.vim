@@ -59,6 +59,8 @@ set smartcase
 " Escape cleans the search highlight
 :nnoremap <ESC> :nohlsearch<cr>
 
+nnoremap <leader>cf :let @+ = expand("%")<CR>
+
 "
 """""""""""""""""""
 " PLUGIN SETTINGS "

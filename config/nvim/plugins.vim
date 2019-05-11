@@ -61,7 +61,8 @@ function! VimrcLoadPlugins()
   Plug 'w0rp/ale', { 'for':  ['javascript.jsx', 'javascript', 'jsx', 'ruby', 'typescript.tsx', 'typescript'] }
 
   " Javascript Support
-  Plug 'pangloss/vim-javascript', { 'for': ['javascript.jsx', 'javascript', 'jsx'] }
+  Plug 'pangloss/vim-javascript'
+  Plug 'mxw/vim-jsx'
 
   " Testing
   Plug 'janko-m/vim-test'
