@@ -64,6 +64,9 @@ function! VimrcLoadPlugins()
   Plug 'pangloss/vim-javascript'
   Plug 'mxw/vim-jsx'
 
+  Plug 'ludovicchabant/vim-gutentags'
+  Plug 'kristijanhusak/vim-js-file-import', {'do': 'npm install'}
+
   " Testing
   Plug 'janko-m/vim-test'
 
