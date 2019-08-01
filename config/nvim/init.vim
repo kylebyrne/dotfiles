@@ -76,8 +76,11 @@ set completeopt-=preview
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
 nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+
 " vim-test remap
 map <Leader>r :TestFile<CR>
+let test#strategy = "neovim"
+let test#neovim#term_position = "belowright"
 
 " ctrlp but like ctrl
 nnoremap <Leader>t :CtrlP <CR>
