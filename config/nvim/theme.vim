@@ -8,6 +8,8 @@ function! VimrcLoadTheme()
     highlight Normal ctermbg=NONE guibg=NONE
     highlight LineNr ctermfg=NONE guibg=NONE
     highlight CursorLineNr ctermfg=NONE guibg=NONE
+    highlight NeomakeVirtualtextError guibg=NONE guifg=red
+		highlight NeomakeErrorMsg guibg=NONE guifg=red
   endfunction
 
   augroup MyColors

@@ -54,7 +54,12 @@ function! VimrcLoadPlugins()
   Plug 'tpope/vim-rails', { 'for': 'ruby' }
   Plug 'tpope/vim-haml', { 'for': 'haml' }
 
+  " rust
   Plug 'rust-lang/rust.vim'
+  Plug 'pest-parser/pest.vim'
+  Plug 'tbodt/deoplete-tabnine', { 'do': './install.sh' }
+  Plug 'fszymanski/deoplete-emoji'
+  Plug 'neomake/neomake'
 
   " Vim support for editing fish scripts
   Plug 'dag/vim-fish', { 'for': 'fish' }
@@ -73,7 +78,6 @@ function! VimrcLoadPlugins()
   Plug 'pangloss/vim-javascript'
   Plug 'mxw/vim-jsx'
 
-  Plug 'ludovicchabant/vim-gutentags'
   Plug 'kristijanhusak/vim-js-file-import', {'do': 'npm install'}
 
   " Testing

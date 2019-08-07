@@ -68,8 +68,10 @@ nnoremap <leader>cf :let @+ = expand("%")<CR>
 " Use deoplete.
 let g:deoplete#enable_at_startup = 1
 let g:LanguageClient_serverCommands = {
+        \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
         \ 'ruby': ['solargraph', 'stdio'],
         \ }
+autocmd CompleteDone * silent! pclose!
 autocmd FileType ruby setlocal omnifunc=LanguageClient#complete
 set completeopt-=preview
 
@@ -103,6 +105,20 @@ nmap <leader>n :NERDTreeToggle<CR>
 let NERDTreeIgnore=['\.DS_Store', '\~$', '\.swp']
 let NERDTreeShowHidden = 1
 
+
+" Neomake
+" Gross hack to stop Neomake running when exitting because it creates a zombie cargo check process
+" which holds the lock and never exits. But then, if you only have QuitPre, closing one pane will
+" disable neomake, so BufEnter reenables when you enter another buffer.
+let s:quitting = 0
+au QuitPre *.rs let s:quitting = 1
+au BufEnter *.rs let s:quitting = 0
+au BufWritePost *.rs if ! s:quitting | Neomake | else | echom "Neomake disabled"| endif
+au QuitPre *.ts let s:quitting = 1
+au BufEnter *.ts let s:quitting = 0
+au BufWritePost *.ts if ! s:quitting | Neomake | else | echom "Neomake disabled"| endif
+let g:neomake_warning_sign = {'text': '?'}
+let g:neomake_error_sign={'texthl': 'NeomakeErrorMsg'}
 """""""""""""""""""""
 " Terminal Settings "
 """""""""""""""""""""

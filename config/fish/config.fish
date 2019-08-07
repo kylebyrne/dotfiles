@@ -2,6 +2,8 @@
 . "$HOME/.config/fish/functions/aliases.fish"
 . "$HOME/.config/fish/functions/prompt.fish"
 
+export PATH="$HOME/.cargo/bin:$PATH"
+
 
 # setup rbenv
 set PATH $HOME/.rbenv/bin $PATH
