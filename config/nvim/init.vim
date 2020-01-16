@@ -74,6 +74,7 @@ let g:LanguageClient_serverCommands = {
 autocmd CompleteDone * silent! pclose!
 autocmd FileType ruby setlocal omnifunc=LanguageClient#complete
 set completeopt-=preview
+let g:rustfmt_autosave = 1
 
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
@@ -110,6 +111,7 @@ let NERDTreeShowHidden = 1
 " Gross hack to stop Neomake running when exitting because it creates a zombie cargo check process
 " which holds the lock and never exits. But then, if you only have QuitPre, closing one pane will
 " disable neomake, so BufEnter reenables when you enter another buffer.
+autocmd BufNewFile *.rs Neomake rustc
 let s:quitting = 0
 au QuitPre *.rs let s:quitting = 1
 au BufEnter *.rs let s:quitting = 0
@@ -119,6 +121,28 @@ au BufEnter *.ts let s:quitting = 0
 au BufWritePost *.ts if ! s:quitting | Neomake | else | echom "Neomake disabled"| endif
 let g:neomake_warning_sign = {'text': '?'}
 let g:neomake_error_sign={'texthl': 'NeomakeErrorMsg'}
+
+
+" Markdown
+nnoremap <Leader>m :MarkdownPreview<CR>
+let g:mkdp_auto_close = 0
+" disable header folding
+let g:vim_markdown_folding_disabled = 1
+
+" do not use conceal feature, the implementation is not so good
+let g:vim_markdown_conceal = 0
+
+" disable math tex conceal feature
+let g:tex_conceal = ""
+let g:vim_markdown_math = 1
+
+" support front matter of various format
+let g:vim_markdown_frontmatter = 1  " for YAML format
+let g:vim_markdown_toml_frontmatter = 1  " for TOML format
+let g:vim_markdown_json_frontmatter = 1  " for JSON format
+
+
+
 """""""""""""""""""""
 " Terminal Settings "
 """""""""""""""""""""

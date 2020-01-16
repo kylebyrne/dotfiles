@@ -47,6 +47,8 @@ function! VimrcLoadPlugins()
   "Manage surroundings like quotes, brackets etc
   Plug 'tpope/vim-surround'
 
+  " tmux vim movement helpers
+  Plug 'christoomey/vim-tmux-navigator'
   " Language and development
   " -------------------------
   " Easy navigation of the Rails directory structure, interface to
@@ -57,9 +59,9 @@ function! VimrcLoadPlugins()
   " rust
   Plug 'rust-lang/rust.vim'
   Plug 'pest-parser/pest.vim'
-  Plug 'tbodt/deoplete-tabnine', { 'do': './install.sh' }
+  " Plug 'tbodt/deoplete-tabnine', { 'do': './install.sh' }
   Plug 'fszymanski/deoplete-emoji'
-  Plug 'neomake/neomake'
+  Plug 'neomake/neomake', { 'for': ['rust'] }
 
   " Vim support for editing fish scripts
   Plug 'dag/vim-fish', { 'for': 'fish' }
@@ -69,10 +71,7 @@ function! VimrcLoadPlugins()
   let g:ale_linters = {
         \   'javascript': ['standard'],
         \}
-  let g:ale_fixers = {'javascript': ['standard']}
-  let g:ale_lint_on_save = 1
   let g:ale_rust_cargo_use_check = 1
-  " let g:ale_fix_on_save = 1
 
   " Javascript Support
   Plug 'pangloss/vim-javascript'
@@ -87,6 +86,12 @@ function! VimrcLoadPlugins()
   " ------------
   Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
   Plug 'itchyny/lightline.vim'
+
+
+  " Markdown
+  Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }}
+  Plug 'godlygeek/tabular'
+  Plug 'plasticboy/vim-markdown'
 
   call plug#end()
 endfunction
