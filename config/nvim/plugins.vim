@@ -18,7 +18,6 @@ function! VimrcLoadPlugins()
   Plug 'wincent/terminus'
   " Autocompletion
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-	Plug 'uplus/deoplete-solargraph'
 	Plug 'autozimu/LanguageClient-neovim', {
 			\ 'branch': 'next',
 			\ 'do': 'bash install.sh',
@@ -55,6 +54,7 @@ function! VimrcLoadPlugins()
   " rake + rails, much much more: https://github.com/tpope/vim-rails
   Plug 'tpope/vim-rails', { 'for': 'ruby' }
   Plug 'tpope/vim-haml', { 'for': 'haml' }
+  Plug 'noprompt/vim-yardoc'
 
   " rust
   Plug 'rust-lang/rust.vim'
@@ -68,6 +68,8 @@ function! VimrcLoadPlugins()
 
   " Asynchronous Lint Engine
   Plug 'w0rp/ale', { 'for':  ['javascript.jsx', 'javascript', 'jsx', 'ruby', 'typescript.tsx', 'typescript'] }
+  let b:ale_fixers = {'ruby': ['rubocop']}
+  let g:ale_fix_on_save = 1
   let g:ale_linters = {
         \   'javascript': ['standard'],
         \}

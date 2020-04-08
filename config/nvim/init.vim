@@ -75,6 +75,7 @@ autocmd CompleteDone * silent! pclose!
 autocmd FileType ruby setlocal omnifunc=LanguageClient#complete
 set completeopt-=preview
 let g:rustfmt_autosave = 1
+autocmd Filetype coffeescript setlocal ts=4 sw=4 sts=0 expandtab
 
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 

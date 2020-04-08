@@ -1,6 +1,5 @@
 . "$HOME/.config/fish/functions/git.fish"
 . "$HOME/.config/fish/functions/aliases.fish"
-. "$HOME/.config/fish/functions/prompt.fish"
 
 export PATH="$HOME/.cargo/bin:$PATH"
 
@@ -14,6 +13,8 @@ set -x  RUBY_GC_HEAP_INIT_SLOTS 600000
 set -x  RUBY_GC_HEAP_FREE_SLOTS 600000
 set -x  RUBY_GC_HEAP_GROWTH_FACTOR 1.25
 set -x  RUBY_GC_HEAP_GROWTH_MAX_SLOTS 300000
+
+set -gx TERM xterm-256color
 
 # # make Vim the default editor
 # set --export EDITOR "nvim"
@@ -46,3 +47,6 @@ function brspec
   set TEST_IN_BROWSER 0
 end
 
+# set -g fish_user_paths "/usr/local/opt/openssl@1.1/bin" $fish_user_paths
+
+starship init fish | source
