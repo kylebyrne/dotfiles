@@ -68,10 +68,14 @@ function! VimrcLoadPlugins()
 
   " Asynchronous Lint Engine
   Plug 'w0rp/ale', { 'for':  ['javascript.jsx', 'javascript', 'jsx', 'ruby', 'typescript.tsx', 'typescript'] }
-  let b:ale_fixers = {'ruby': ['rubocop']}
+  let g:ale_fixers = {
+        \ 'ruby': ['rubocop'],
+        \ 'javascript': ['eslint', 'prettier']
+        \ }
   let g:ale_fix_on_save = 1
   let g:ale_linters = {
-        \   'javascript': ['standard'],
+        \   'javascript': ['eslint', 'prettier'],
+        \   'ruby': ['rubocop']
         \}
   let g:ale_rust_cargo_use_check = 1
 
