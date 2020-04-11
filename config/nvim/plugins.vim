@@ -14,8 +14,6 @@ function! VimrcLoadPlugins()
 
   " General NeoVIM improvements
   " ------------------------
-  " Enhanced terminal integration
-  Plug 'wincent/terminus'
   " Autocompletion
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 	Plug 'autozimu/LanguageClient-neovim', {
@@ -23,13 +21,9 @@ function! VimrcLoadPlugins()
 			\ 'do': 'bash install.sh',
 			\ }
 
-  " Wrapper of some neovim's :terminal functions
-  Plug 'kassio/neoterm'
-  " Plugin to help you stop repeating the basic movement keys
-  Plug 'takac/vim-hardtime'
-
-  "Ctrl P for fuzzy finding
-  Plug 'kien/ctrlp.vim'
+  " Fzf for fuzzy finding
+  Plug 'junegunn/fzf', { 'do': 'yes \| ./install --all' }
+  Plug 'junegunn/fzf.vim'
 
   "Ack for acking
   Plug 'mileszs/ack.vim'
@@ -48,6 +42,7 @@ function! VimrcLoadPlugins()
 
   " tmux vim movement helpers
   Plug 'christoomey/vim-tmux-navigator'
+
   " Language and development
   " -------------------------
   " Easy navigation of the Rails directory structure, interface to
@@ -59,12 +54,13 @@ function! VimrcLoadPlugins()
   " rust
   Plug 'rust-lang/rust.vim'
   Plug 'pest-parser/pest.vim'
-  " Plug 'tbodt/deoplete-tabnine', { 'do': './install.sh' }
-  Plug 'fszymanski/deoplete-emoji'
   Plug 'neomake/neomake', { 'for': ['rust'] }
 
-  " Vim support for editing fish scripts
-  Plug 'dag/vim-fish', { 'for': 'fish' }
+  " Javascript
+  Plug 'pangloss/vim-javascript'
+  Plug 'mxw/vim-jsx'
+  Plug 'kristijanhusak/vim-js-file-import', {'do': 'npm install'}
+
 
   " Asynchronous Lint Engine
   Plug 'w0rp/ale', { 'for':  ['javascript.jsx', 'javascript', 'jsx', 'ruby', 'typescript.tsx', 'typescript'] }
@@ -79,12 +75,6 @@ function! VimrcLoadPlugins()
         \}
   let g:ale_rust_cargo_use_check = 1
 
-  " Javascript Support
-  Plug 'pangloss/vim-javascript'
-  Plug 'mxw/vim-jsx'
-
-  Plug 'kristijanhusak/vim-js-file-import', {'do': 'npm install'}
-
   " Testing
   Plug 'janko-m/vim-test'
 
@@ -92,12 +82,6 @@ function! VimrcLoadPlugins()
   " ------------
   Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
   Plug 'itchyny/lightline.vim'
-
-
-  " Markdown
-  Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }}
-  Plug 'godlygeek/tabular'
-  Plug 'plasticboy/vim-markdown'
 
   call plug#end()
 endfunction
