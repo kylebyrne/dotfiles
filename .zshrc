@@ -8,7 +8,6 @@ alias vim="nvim"
 setopt no_complete_aliases
 
 # Set TERM to allow tmux to work with alacritty
-# see https://github.com/alacritty/alacritty/issues/2487
 export TERM=xterm-256color
 
 # Setup for autojump
@@ -30,6 +29,8 @@ export NVM_DIR="$HOME/.nvm"
 export FZF_DEFAULT_COMMAND="rg --files --follow --hidden --glob '!.git/*' --glob \
   '!sorbet/**' --glob '!tags' --glob '!yarn.lock' --glob '!package.json'"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
+export EDITOR=/usr/local/bin/nvim
 
 # Initialize rbenv
 eval "$(rbenv init -)"
