@@ -1,0 +1,35 @@
+prompt_order = ["time", "directory", "git_branch", "git_state", "git_status", "line_break", "character"]
+[aws]
+disabled = true
+
+[nodejs]
+disabled = true
+
+[ruby]
+disabled = true
+
+[git_branch]
+symbol = " "
+
+[git_status]
+prefix = ""
+suffix = ""
+
+[git_status.staged]
+value = "•"
+style = "yellow"
+
+[git_status.untracked]
+value = "•"
+style = "blue"
+
+[git_status.deleted]
+value = "•"
+style = "red"
+
+[git_status.modified]
+value = "•"
+style = "green"
+
+[time]
+disabled = false
