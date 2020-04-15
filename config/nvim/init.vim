@@ -38,6 +38,8 @@ let maplocalleader = " "
 " Avoid swp files at all costs
 set noswapfile
 
+set mouse=a
+
 " Convenient re-source of vim config
 map <leader>s :source ~/.vimrc<CR>
 

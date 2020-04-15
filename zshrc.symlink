@@ -1,11 +1,34 @@
 export PATH="$HOME/.cargo/bin:$PATH"
 
+# Lines configured by zsh-newuser-install
+HISTFILE=~/.histfile
+HISTSIZE=1000
+SAVEHIST=10000
+# End of lines configured by zsh-newuser-install
+# The following lines were added by compinstall
+zstyle :compinstall filename '/Users/kylebyrne/.zshrc'
+
+autoload -Uz compinit
+for dump in ~/.zcompdump(N.mh+24); do
+  compinit
+done
+compinit -C
+# End of lines added by compinstall
+
+source /usr/local/share/zsh-history-substring-search/zsh-history-substring-search.zsh
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+
 # Aliases
 alias vi="nvim"
 alias vim="nvim"
 
 # Turn off complete aliases to work with SCM Breeze
 setopt no_complete_aliases
+
+setopt share_history
+setopt append_history
 
 # Set TERM to allow tmux to work with alacritty
 export TERM=xterm-256color
@@ -18,10 +41,20 @@ export TERM=xterm-256color
 [ -s "/Users/kylebyrne/.scm_breeze/scm_breeze.sh" ] && source "/Users/kylebyrne/.scm_breeze/scm_breeze.sh"
 
 
-# Initialize nvm
-export NVM_DIR="$HOME/.nvm"
-  [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
-  [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+# Lazy Initialize nvm following https://www.reddit.com/r/node/comments/4tg5jg/lazy_load_nvm_for_faster_shell_start/d5ib9fs/
+declare -a NODE_GLOBALS=(`find ~/.nvm/versions/node -maxdepth 3 -type l -wholename '*/bin/*' | xargs -n1 basename | sort | uniq`)
+
+NODE_GLOBALS+=("node")
+NODE_GLOBALS+=("nvm")
+
+load_nvm () {
+    export NVM_DIR=~/.nvm
+    [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+}
+
+for cmd in "${NODE_GLOBALS[@]}"; do
+    eval "${cmd}(){ unset -f ${NODE_GLOBALS}; load_nvm; ${cmd} \$@ }"
+done
 
 # Initialize fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

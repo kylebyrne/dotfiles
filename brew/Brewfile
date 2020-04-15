@@ -24,6 +24,7 @@ brew 'tmux'
 brew 'yarn'
 brew 'fzf'
 brew 'ripgrep'
+brew 'zsh-history-substring-search'
 
 # Apps
 cask 'firefox'
