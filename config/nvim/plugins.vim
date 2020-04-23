@@ -25,6 +25,9 @@ function! VimrcLoadPlugins()
   Plug 'junegunn/fzf', { 'do': 'yes \| ./install --all' }
   Plug 'junegunn/fzf.vim'
 
+  " Wrapper of some neovim's :terminal functions
+  Plug 'kassio/neoterm'
+
   "Ack for acking
   Plug 'mileszs/ack.vim'
 
