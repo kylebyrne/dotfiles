@@ -1,4 +1,7 @@
+export PATH=$HOME/bin:/usr/local/bin:$PATH
+
 export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="$HOME/.platformio/penv/bin:$PATH"
 
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.histfile
@@ -38,7 +41,8 @@ setopt append_history
 export TERM=xterm-256color
 
 # Setup for autojump
-[ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
+
+[ -f $HOME/.nix-profile/etc/profile.d/autojump.sh ] && . $HOME/.nix-profile/etc/profile.d/autojump.sh
 
 # SCM Breeze install
 # [ -s "$HOME/.scm_breeze/scm_breeze.sh" ] && source "$HOME/.scm_breeze/scm_breeze.sh"
@@ -61,9 +65,6 @@ export TERM=xterm-256color
 #     eval "${cmd}(){ unset -f ${NODE_GLOBALS}; load_nvm; ${cmd} \$@ }"
 # done
 
-export NVM_DIR="$HOME/.nvm"
-  [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
-  [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
 # Initialize fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -72,14 +73,32 @@ export FZF_DEFAULT_COMMAND="rg --files --follow --hidden --glob '!.git/*' --glob
   '!sorbet/**' --glob '!tags' --glob '!yarn.lock' --glob '!package.json'"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
-export EDITOR=/usr/local/bin/nvim
+export EDITOR=/Users/kylebyrne/.nix-profile/bin/nvim
 
-# Initialize rbenv
+if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
+  . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
+fi
+
+
+
+# Trying to get rid of nvm and rbenv using nix shell
+export NVM_DIR=~/.nvm && . /usr/local/opt/nvm/nvm.sh
+# [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 eval "$(rbenv init -)"
+# # export DIRENV_LOG_FORMAT=
+# export DIRENV_LOG_FORMAT="$(printf "\033[35mdirenv: %%s\033[0m")"
+# eval "$(direnv hook zsh)"
+
 
 # Initialize starship prompt
 eval "$(starship init zsh)"
 
-checkout_amend() {
-  git checkout origin/finance-ammends -- $1
+
+export NIX_PATH=$HOME/.nix-defexpr/channels${NIX_PATH:+:}$NIX_PATH
+# export NIX_SSL_CERT_FILE=/usr/local/etc/openssl/cert.pem  
+
+really_test() {
+  TIMES=${2:-10}
+  for run in `seq $TIMES`; do rspec $1; [[ ! $? = 0 ]] && break ; done
 }

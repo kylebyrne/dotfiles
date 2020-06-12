@@ -41,7 +41,7 @@ set noswapfile
 set mouse=a
 
 " Convenient re-source of vim config
-map <leader>s :source ~/.vimrc<CR>
+map <leader>s :source ~/.config/nvim/init.vim <CR>
 
 " Use the system clipboard
 set clipboard+=unnamedplus

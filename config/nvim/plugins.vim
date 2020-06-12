@@ -54,6 +54,8 @@ function! VimrcLoadPlugins()
   Plug 'tpope/vim-haml', { 'for': 'haml' }
   Plug 'noprompt/vim-yardoc'
 
+  Plug 'LnL7/vim-nix'
+
   " rust
   Plug 'rust-lang/rust.vim'
   Plug 'pest-parser/pest.vim'
@@ -64,16 +66,19 @@ function! VimrcLoadPlugins()
   Plug 'mxw/vim-jsx'
   Plug 'kristijanhusak/vim-js-file-import', {'do': 'npm install'}
 
+  " handlebars
+  Plug 'mustache/vim-mustache-handlebars'
+
 
   " Asynchronous Lint Engine
   Plug 'w0rp/ale', { 'for':  ['javascript.jsx', 'javascript', 'jsx', 'ruby', 'typescript.tsx', 'typescript'] }
   let g:ale_fixers = {
         \ 'ruby': ['rubocop'],
-        \ 'javascript': ['eslint', 'prettier']
+        \ 'javascript': ['eslint']
         \ }
   let g:ale_fix_on_save = 1
   let g:ale_linters = {
-        \   'javascript': ['eslint', 'prettier'],
+        \   'javascript': ['eslint'],
         \   'ruby': ['rubocop']
         \}
   let g:ale_rust_cargo_use_check = 1
