@@ -82,10 +82,10 @@ fi
 
 
 # Trying to get rid of nvm and rbenv using nix shell
-export NVM_DIR=~/.nvm && . /usr/local/opt/nvm/nvm.sh
+# export NVM_DIR=~/.nvm && . /usr/local/opt/nvm/nvm.sh
 # [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
-[ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
-eval "$(rbenv init -)"
+# [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+# eval "$(rbenv init -)"
 # # export DIRENV_LOG_FORMAT=
 # export DIRENV_LOG_FORMAT="$(printf "\033[35mdirenv: %%s\033[0m")"
 # eval "$(direnv hook zsh)"

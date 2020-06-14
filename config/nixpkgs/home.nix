@@ -26,6 +26,7 @@
     # tmux
     Firefox
     Hammerspoon
+    starship
   ];
 
   # services.lorri.enable = true;
@@ -38,7 +39,7 @@
   programs.alacritty = {
     enable = true;
     settings = lib.attrsets.recursiveUpdate (import ./alacritty.nix) {
-      shell.program = "/usr/local/bin/zsh";
+      shell.program = "/bin/zsh";
     };
   };
 
@@ -59,5 +60,5 @@
   # You can update Home Manager without changing this value. See
   # the Home Manager release notes for a list of state version
   # changes in each release.
-  home.stateVersion = "20.03";
+  home.stateVersion = "19.09";
 }
