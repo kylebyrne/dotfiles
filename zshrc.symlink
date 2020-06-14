@@ -2,6 +2,7 @@ export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/.platformio/penv/bin:$PATH"
+export PATH="/run/current-system/sw/bin:$PATH"
 
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.histfile
@@ -73,7 +74,7 @@ export FZF_DEFAULT_COMMAND="rg --files --follow --hidden --glob '!.git/*' --glob
   '!sorbet/**' --glob '!tags' --glob '!yarn.lock' --glob '!package.json'"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
-export EDITOR=/Users/kylebyrne/.nix-profile/bin/nvim
+export EDITOR=/Users/kyle/.nix-profile/bin/nvim
 
 if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
   . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'

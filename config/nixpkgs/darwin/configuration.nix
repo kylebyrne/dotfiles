@@ -1,8 +1,6 @@
 { config, pkgs, lib, ... }:
 
-let 
-  hammerspoon = pkgs.callPackage /users/kylebyrne/.config/nixpkgs/darwin/hammerspoon.nix { };
-in {
+{
   imports = [ ./lorri.nix ];
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
@@ -21,12 +19,11 @@ in {
   };
   # Use a custom configuration.nix location.
   # $ darwin-rebuild switch -I darwin-config=$HOME/.config/nixpkgs/darwin/configuration.nix
-  environment.darwinConfig = "$HOME/.config/nixpkgs/darwin/configuration.nix";
+  environment.darwinConfig = "/dots/config/nixpkgs/darwin/configuration.nix";
 
   environment.systemPackages = with pkgs; [
     home-manager
     git
-    hammerspoon
     zsh
     # _1password
   ];
@@ -36,6 +33,31 @@ in {
   programs.bash.enable = false;
   programs.zsh.enable = true;
   # programs.fish.enable = true;
+
+
+  system.defaults.NSGlobalDomain.AppleKeyboardUIMode = 3;
+  system.defaults.NSGlobalDomain.ApplePressAndHoldEnabled = false;
+  system.defaults.NSGlobalDomain.InitialKeyRepeat = 10;
+  system.defaults.NSGlobalDomain.KeyRepeat = 2;
+  system.defaults.NSGlobalDomain.NSAutomaticCapitalizationEnabled = false;
+  system.defaults.NSGlobalDomain.NSAutomaticDashSubstitutionEnabled = false;
+  system.defaults.NSGlobalDomain.NSAutomaticPeriodSubstitutionEnabled = false;
+  system.defaults.NSGlobalDomain.NSAutomaticQuoteSubstitutionEnabled = false;
+  system.defaults.NSGlobalDomain.NSAutomaticSpellingCorrectionEnabled = false;
+  system.defaults.NSGlobalDomain.NSNavPanelExpandedStateForSaveMode = true;
+  system.defaults.NSGlobalDomain.NSNavPanelExpandedStateForSaveMode2 = true;
+
+  system.defaults.dock.autohide = true;
+  system.defaults.dock.orientation = "right";
+  system.defaults.dock.showhidden = true;
+  system.defaults.dock.mru-spaces = false;
+
+  system.defaults.finder.AppleShowAllExtensions = true;
+  system.defaults.finder.QuitMenuItem = true;
+  system.defaults.finder.FXEnableExtensionChangeWarning = false;
+
+  system.defaults.trackpad.Clicking = false;
+  system.defaults.trackpad.TrackpadThreeFingerDrag = true;
 
   # Used for backwards compatibility, please read the changelog before changing.
   # $ darwin-rebuild changelog

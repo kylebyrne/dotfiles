@@ -25,9 +25,7 @@
     # Currently tmux in nix isn't supporting the popup window from fzf-tmux
     # tmux
     Firefox
-    Hammerspoon
     starship
-    Firefox
   ];
 
   # services.lorri.enable = true;

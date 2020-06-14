@@ -90,6 +90,12 @@
         "options": {
           "full_name": "karabiner-elements"
         }
+      },
+      "hammerspoon": {
+        "version": "0.9.78",
+        "options": {
+          "full_name": "hammerspoon"
+        }
       }
     }
   },
