@@ -26,7 +26,6 @@
     # tmux
     Dash
     Firefox
-    __1password
   ];
 
   # services.lorri.enable = true;

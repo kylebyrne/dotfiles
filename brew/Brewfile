@@ -1,33 +1,16 @@
 # Taps
 tap 'caskroom/cask'
 tap 'caskroom/fonts'
-tap 'caskroom/versions'
-tap 'homebrew/bundle'
-tap 'homebrew/dupes'
 
 # Make sure apps get installed in system Applications dir
 cask_args appdir: '/Applications'
-
-brew 'autojump'
-brew 'cask'
-brew 'gh'
-brew 'git'
-brew 'heroku'
-brew 'neovim'
-brew 'nvm'
-brew 'parity'
-brew 'postgresql@11'
-brew 'rbenv'
-brew 'redis'
-brew 'starship'
-brew 'tmux'
-brew 'yarn'
-brew 'fzf'
-brew 'ripgrep'
 brew 'zsh-history-substring-search'
 
 # Apps
-cask 'firefox'
 cask 'slack'
 cask '1password'
 cask 'spotify'
+cask 'zoom'
+cask 'notion'
+cask 'logitech-options'
+cask 'obinslab-starter'
