@@ -27,6 +27,7 @@
     Firefox
     Hammerspoon
     starship
+    Firefox
   ];
 
   # services.lorri.enable = true;

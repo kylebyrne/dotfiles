@@ -1,16 +1,7 @@
-# Taps
-tap 'caskroom/cask'
-tap 'caskroom/fonts'
-
-# Make sure apps get installed in system Applications dir
-cask_args appdir: '/Applications'
-brew 'zsh-history-substring-search'
-
-# Apps
 cask 'slack'
 cask '1password'
 cask 'spotify'
-cask 'zoom'
+cask 'zoomus'
 cask 'notion'
-cask 'logitech-options'
 cask 'obinslab-starter'
+cask 'karabiner-elements'

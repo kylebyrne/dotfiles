@@ -47,6 +47,50 @@
           }
         }
       }
+    },
+    "cask": {
+      "slack": {
+        "version": "4.6.0",
+        "options": {
+          "full_name": "slack"
+        }
+      },
+      "1password": {
+        "version": "7.5",
+        "options": {
+          "full_name": "1password"
+        }
+      },
+      "spotify": {
+        "version": "latest",
+        "options": {
+          "full_name": "spotify"
+        }
+      },
+      "zoomus": {
+        "version": "5.0.26223.0603",
+        "options": {
+          "full_name": "zoomus"
+        }
+      },
+      "notion": {
+        "version": "2.0.7",
+        "options": {
+          "full_name": "notion"
+        }
+      },
+      "obinslab-starter": {
+        "version": "1.1.4",
+        "options": {
+          "full_name": "obinslab-starter"
+        }
+      },
+      "karabiner-elements": {
+        "version": "12.9.0",
+        "options": {
+          "full_name": "karabiner-elements"
+        }
+      }
     }
   },
   "system": {
@@ -58,6 +102,14 @@
         "CLT": "",
         "Xcode": "10.3",
         "macOS": "10.14"
+      },
+      "catalina": {
+        "HOMEBREW_VERSION": "2.4.0",
+        "HOMEBREW_PREFIX": "/usr/local",
+        "Homebrew/homebrew-core": "7a86fed0b607c806cfdd718e62f3fa7b66b30839",
+        "CLT": "1103.0.32.62",
+        "Xcode": "11.4.1",
+        "macOS": "10.15.5"
       }
     }
   }
