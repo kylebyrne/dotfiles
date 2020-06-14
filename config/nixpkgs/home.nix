@@ -24,8 +24,8 @@
 
     # Currently tmux in nix isn't supporting the popup window from fzf-tmux
     # tmux
-    Dash
     Firefox
+    Hammerspoon
   ];
 
   # services.lorri.enable = true;
@@ -33,7 +33,7 @@
     enable = true;
   };
 
-
+  home.file.".hammerspoon".source = /dots/config/hammerspoon;
 
   programs.alacritty = {
     enable = true;

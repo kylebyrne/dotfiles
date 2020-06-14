@@ -35,4 +35,15 @@ self: super: {
     description = "The Firefox web browser";
     homepage = https://www.mozilla.org/en-US/firefox/;
   };
+
+  Hammerspoon = self.installApplication rec {
+    name = "Hammerspoon";
+    version = "0.9.76";
+    src = super.fetchurl {
+      url = "https://github.com/Hammerspoon/hammerspoon/releases/download/${version}/Hammerspoon-${version}.zip";
+      sha256 = "1r6mjn2cafdyrwqrnfi74cm4wy0fns44j30rsy31800kmqi9ifdb";
+    };
+    description = "Staggeringly powerful macOS desktop automation with Lua";
+    homepage = "https://www.hammerspoon.org";
+  };
 }
