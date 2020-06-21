@@ -2,9 +2,14 @@
 
 {
 
-  nixpkgs.config = {
-    allowUnfree = true;
+  nixpkgs.config.allowUnfree = true;
+
+  nixpkgs.config.packageOverrides = pkgs: {
+    nur = import (builtins.fetchTarball "https://github.com/nix-community/NUR/archive/master.tar.gz") {
+      inherit pkgs;
+    };
   };
+
   nixpkgs.overlays =
       let path = ./overlays; in with builtins;
       map (n: import (path + ("/" + n)))
@@ -24,7 +29,6 @@
 
     # Currently tmux in nix isn't supporting the popup window from fzf-tmux
     # tmux
-    Firefox
     starship
   ];
 

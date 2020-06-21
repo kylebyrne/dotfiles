@@ -4,21 +4,6 @@ export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/.platformio/penv/bin:$PATH"
 export PATH="/run/current-system/sw/bin:$PATH"
 
-# Lines configured by zsh-newuser-install
-HISTFILE=~/.histfile
-HISTSIZE=1000
-SAVEHIST=10000
-# End of lines configured by zsh-newuser-install
-# The following lines were added by compinstall
-zstyle :compinstall filename '/Users/kylebyrne/.zshrc'
-
-autoload -Uz compinit
-for dump in ~/.zcompdump(N.mh+24); do
-  compinit
-done
-compinit -C
-# End of lines added by compinstall
-
 source /usr/local/share/zsh-history-substring-search/zsh-history-substring-search.zsh
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
@@ -47,7 +32,7 @@ export TERM=xterm-256color
 
 # SCM Breeze install
 # [ -s "$HOME/.scm_breeze/scm_breeze.sh" ] && source "$HOME/.scm_breeze/scm_breeze.sh"
-[ -s "/Users/kylebyrne/.scm_breeze/scm_breeze.sh" ] && source "/Users/kylebyrne/.scm_breeze/scm_breeze.sh"
+[ -s "/Users/kyle/.scm_breeze/scm_breeze.sh" ] && source "/Users/kyle/.scm_breeze/scm_breeze.sh"
 
 
 # Lazy Initialize nvm following https://www.reddit.com/r/node/comments/4tg5jg/lazy_load_nvm_for_faster_shell_start/d5ib9fs/
@@ -89,7 +74,7 @@ fi
 # eval "$(rbenv init -)"
 # # export DIRENV_LOG_FORMAT=
 # export DIRENV_LOG_FORMAT="$(printf "\033[35mdirenv: %%s\033[0m")"
-# eval "$(direnv hook zsh)"
+eval "$(direnv hook zsh)"
 
 
 # Initialize starship prompt

@@ -54,7 +54,6 @@
 
   system.defaults.finder.AppleShowAllExtensions = true;
   system.defaults.finder.QuitMenuItem = true;
-  system.defaults.finder.FXEnableExtensionChangeWarning = false;
 
   system.defaults.trackpad.Clicking = false;
   system.defaults.trackpad.TrackpadThreeFingerDrag = true;

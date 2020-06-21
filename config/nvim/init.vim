@@ -124,13 +124,13 @@ let test#neovim#term_position = "belowright"
 """""""
 nnoremap <Leader>t :FZF <CR>
 let g:fzf_prefer_tmux = 1
-let g:fzf_layout = { 'tmux': '-p50%,40%' }
+" let g:fzf_layout = { 'tmux': '-p50%,40%' }
 """""""
 " Ack "
 """""""
 nnoremap <Leader>f :Ack ''<left>
 " make ack.vim use the thesilversearcher
-let g:ackprg="ag --nogroup --nocolor --column"
+let g:ackprg = 'rg --vimgrep --no-heading'
 
 
 """"""""""""
