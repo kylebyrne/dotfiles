@@ -82,6 +82,7 @@ set smartcase
 
 " Shortcut to yank current file path
 nnoremap <leader>cf :let @+ = expand("%")<CR>
+au BufRead,BufNewFile *.md setlocal textwidth=80
 
 " ======================================================
 " ██████╗ ██╗     ██╗   ██╗ ██████╗ ██╗███╗   ██╗███████╗
@@ -115,7 +116,8 @@ nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
 " vim-test "
 """"""""""""
 map <Leader>r :TestFile<CR>
-let test#strategy = "neovim"
+map <Leader>e :TestNearest<CR>
+let test#strategy = "vimux"
 let test#neovim#term_position = "belowright"
 
 
@@ -123,8 +125,8 @@ let test#neovim#term_position = "belowright"
 " fzf "
 """""""
 nnoremap <Leader>t :FZF <CR>
-let g:fzf_prefer_tmux = 1
-" let g:fzf_layout = { 'tmux': '-p50%,40%' }
+" let g:fzf_prefer_tmux = 1
+let g:fzf_layout = { 'tmux': '-p50%,40%' }
 """""""
 " Ack "
 """""""

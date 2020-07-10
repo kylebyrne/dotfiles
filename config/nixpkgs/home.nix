@@ -26,10 +26,15 @@
     # Development
     neovim
     direnv
+    nodejs
+    yarn
+    heroku
 
     # Currently tmux in nix isn't supporting the popup window from fzf-tmux
     # tmux
     starship
+    ngrok
+    awscli
   ];
 
   # services.lorri.enable = true;

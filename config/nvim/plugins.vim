@@ -45,6 +45,7 @@ function! VimrcLoadPlugins()
 
   " tmux vim movement helpers
   Plug 'christoomey/vim-tmux-navigator'
+  Plug 'benmills/vimux'
 
   " Language and development
   " -------------------------
@@ -68,6 +69,9 @@ function! VimrcLoadPlugins()
 
   " handlebars
   Plug 'mustache/vim-mustache-handlebars'
+
+  Plug 'godlygeek/tabular'
+  Plug 'plasticboy/vim-markdown'
 
 
   " Asynchronous Lint Engine

@@ -20,7 +20,7 @@
   ];
 
   font = {
-    size = 13.0;
+    size = 11.0;
     use_thin_strokes = true;
 
     normal.family = "JetBrains Mono";

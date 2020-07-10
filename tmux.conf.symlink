@@ -1,5 +1,5 @@
-set -g default-command /nix/store/fq7j62gxwriz983cv0l3ays82ijll2sk-zsh-5.8/bin/zsh
-set -g default-shell /nix/store/fq7j62gxwriz983cv0l3ays82ijll2sk-zsh-5.8/bin/zsh
+set -g default-command /run/current-system/sw/bin/zsh
+set -g default-shell /run/current-system/sw/bin/zsh
 
 ## set scroll history to 100,000 lines
 set-option -g history-limit 100000

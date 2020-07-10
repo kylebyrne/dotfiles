@@ -68,7 +68,7 @@
         }
       },
       "zoomus": {
-        "version": "5.0.26223.0603",
+        "version": "5.1.27838.0614",
         "options": {
           "full_name": "zoomus"
         }
@@ -102,6 +102,12 @@
         "options": {
           "full_name": "tableplus"
         }
+      },
+      "firefox": {
+        "version": "77.0.1",
+        "options": {
+          "full_name": "firefox"
+        }
       }
     }
   },
@@ -118,8 +124,8 @@
       "catalina": {
         "HOMEBREW_VERSION": "2.4.0",
         "HOMEBREW_PREFIX": "/usr/local",
-        "Homebrew/homebrew-core": "34bfabe564223bc4f0e6e06a7e3cf46b482a01ad",
-        "CLT": "1103.0.32.62",
+        "Homebrew/homebrew-core": "4f3541480411325766cb62cdedb839559af49a60",
+        "CLT": "11.5.0.0.1.1588476445",
         "Xcode": "11.4.1",
         "macOS": "10.15.5"
       }
