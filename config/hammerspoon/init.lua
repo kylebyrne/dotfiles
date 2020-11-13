@@ -11,6 +11,7 @@ singleapps = {
   {'s', 'Slack'},
   {'p', 'Finder'},
   {'e', 'Spark'},
+  {'d', 'Dash'},
 }
 
 for i, app in ipairs(singleapps) do

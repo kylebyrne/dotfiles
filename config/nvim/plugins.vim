@@ -21,12 +21,11 @@ function! VimrcLoadPlugins()
 			\ 'do': 'bash install.sh',
 			\ }
 
+  Plug 'prabirshrestha/vim-lsp'
+
   " Fzf for fuzzy finding
   Plug 'junegunn/fzf', { 'do': 'yes \| ./install --all' }
   Plug 'junegunn/fzf.vim'
-
-  " Wrapper of some neovim's :terminal functions
-  Plug 'kassio/neoterm'
 
   "Ack for acking
   Plug 'mileszs/ack.vim'
@@ -42,6 +41,7 @@ function! VimrcLoadPlugins()
 
   "Manage surroundings like quotes, brackets etc
   Plug 'tpope/vim-surround'
+  Plug 'tpope/vim-fugitive'
 
   " tmux vim movement helpers
   Plug 'christoomey/vim-tmux-navigator'
@@ -65,27 +65,12 @@ function! VimrcLoadPlugins()
   " Javascript
   Plug 'pangloss/vim-javascript'
   Plug 'mxw/vim-jsx'
-  Plug 'kristijanhusak/vim-js-file-import', {'do': 'npm install'}
 
   " handlebars
   Plug 'mustache/vim-mustache-handlebars'
 
-  Plug 'godlygeek/tabular'
-  Plug 'plasticboy/vim-markdown'
-
-
   " Asynchronous Lint Engine
-  Plug 'w0rp/ale', { 'for':  ['javascript.jsx', 'javascript', 'jsx', 'ruby', 'typescript.tsx', 'typescript'] }
-  let g:ale_fixers = {
-        \ 'ruby': ['rubocop'],
-        \ 'javascript': ['eslint']
-        \ }
-  let g:ale_fix_on_save = 1
-  let g:ale_linters = {
-        \   'javascript': ['eslint'],
-        \   'ruby': ['rubocop']
-        \}
-  let g:ale_rust_cargo_use_check = 1
+  Plug 'w0rp/ale', { 'for':  ['javascript.jsx', 'javascript', 'jsx', 'ruby'] }
 
   " Testing
   Plug 'janko-m/vim-test'

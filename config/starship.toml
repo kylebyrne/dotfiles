@@ -1,4 +1,13 @@
-prompt_order = ["time", "directory", "git_branch", "git_state", "git_status", "line_break", "character"]
+format = """\
+$time\
+$directory\
+$git_branch\
+$git_state\
+$git_status\
+$line_break\
+$character\
+  """
+
 [aws]
 disabled = true
 
@@ -12,8 +21,7 @@ disabled = true
 symbol = " "
 
 [git_status]
-prefix = ""
-suffix = ""
+format = '([$all_status$ahead_behind]($style) )'
 
 [git_status.staged]
 value = "•"

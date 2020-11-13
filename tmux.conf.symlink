@@ -1,9 +1,6 @@
 set -g default-command /run/current-system/sw/bin/zsh
 set -g default-shell /run/current-system/sw/bin/zsh
 
-## set scroll history to 100,000 lines
-set-option -g history-limit 100000
-
 # modern colors
 set -g default-terminal "xterm-256color"
 set -ga terminal-overrides ",alacritty:Tc"
@@ -15,10 +12,11 @@ unbind C-b
 set -g prefix C-a
 bind C-a send-prefix
 
-# copy to X clipboard
-bind -T copy-mode-vi v send -X begin-selection
-bind -T copy-mode-vi y send-keys -X copy-pipe 'xclip -in -selection clipboard &> /dev/null'
-bind -T copy-mode-vi Enter send-keys -X cancel
+set-window-option -g mode-keys vi
+set -g default-command "reattach-to-user-namespace -l ${SHELL}"
+
+bind-key -T copy-mode-vi 'v' send-keys -X begin-selection 
+bind-key -T copy-mode-vi 'y' send-keys -X copy-pipe-and-cancel 'reattach-to-user-namespace pbcopy'
 
 # Avoid ESC delay
 set -s escape-time 0
@@ -26,9 +24,6 @@ set -s escape-time 0
 # Fix titlebar
 set -g set-titles on
 set -g set-titles-string "#T"
-
-# VIM mode
-set -g mode-keys vi
 
 # Mouse friendly
 set -g mouse on

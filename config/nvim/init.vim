@@ -43,8 +43,8 @@ set mouse=a
 " Convenient re-source of vim config
 map <leader>s :source ~/.config/nvim/init.vim <CR>
 
-" Use the system clipboard
-set clipboard+=unnamedplus
+" " Use the system clipboard
+" set clipboard+=unnamedplus
 
 " Change splitting rules
 set splitright
@@ -84,6 +84,14 @@ set smartcase
 nnoremap <leader>cf :let @+ = expand("%")<CR>
 au BufRead,BufNewFile *.md setlocal textwidth=80
 
+" Move your lines about
+nnoremap <c-j> :m .+1<CR>==
+nnoremap <c-k> :m .-2<CR>==
+inoremap <c-j> <Esc>:m .+1<CR>==gi
+inoremap <c-k> <Esc>:m .-2<CR>==gi
+vnoremap <c-j> :m '>+1<CR>gv=gv
+vnoremap <c-k> :m '<-2<CR>gv=gv
+
 " ======================================================
 " ██████╗ ██╗     ██╗   ██╗ ██████╗ ██╗███╗   ██╗███████╗
 " ██╔══██╗██║     ██║   ██║██╔════╝ ██║████╗  ██║██╔════╝
@@ -112,11 +120,80 @@ inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
 nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
 
+"""""""
+" LSP "
+"""""""
+function! s:on_lsp_buffer_enabled() abort
+  setlocal omnifunc=lsp#complete
+  setlocal signcolumn=yes
+  echom "loaded"
+  " Find definition of word under cursor
+  nnoremap <buffer> <leader>ld :LspDefinition<CR>
+  " Find callers of word under cursor
+  nnoremap <buffer> <leader>lr :LspReferences<CR>
+  " Rename symbol throughout project
+  nnoremap <buffer> <leader>lR :LspRename<CR>
+  " Show docs (e.g. from libraries)
+  nnoremap <buffer> <leader>lK :LspHover<CR>
+  " Format document layout
+  nnoremap <buffer> <leader>lf :LspDocumentFormat<CR>
+endfunction
+augroup lsp_install
+    au!
+    " call s:on_lsp_buffer_enabled only for languages that has the server registered.
+    autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
+augroup END
+
+" Address (likely temporary bug) whereby LSP completions with asyncomplete
+" Ate two characters following insertion
+let g:lsp_text_edit_enabled = 0
+" Ruby lsp
+" Prerequisites:
+" > gem install solargraph
+au User lsp_setup call lsp#register_server({
+      \ 'name': 'solargraph',
+      \ 'cmd': {server_info->[&shell, &shellcmdflag, 'bundle exec solargraph stdio']},
+      \ 'initialization_options': {"diagnostics": "true"},
+      \ 'whitelist': ['ruby'],
+      \ })
+
+" JavaScript and Typescript LSP
+" Prerequisites:
+" $ npm install -g typescript typescript-language-server
+if executable('typescript-language-server')
+    au User lsp_setup call lsp#register_server({
+      \ 'name': 'javascript support using typescript-language-server',
+      \ 'cmd': { server_info->[&shell, &shellcmdflag, 'typescript-language-server --stdio']},
+      \ 'root_uri': { server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_directory(lsp#utils#get_buffer_path(), '.git/..'))},
+      \ 'whitelist': ['javascript', 'javascript.jsx', 'javascriptreact']
+      \ })
+endif
+
+
+"""""""
+" ALE "
+"""""""
+let g:ale_completion_enabled = 0
+
+let g:ale_fix_on_save = 1
+
+let g:ale_fixers = {
+      \ 'ruby': ['rubocop'],
+      \ 'javascript': ['eslint']
+      \ }
+let g:ale_linters = {
+      \   'javascript': ['eslint'],
+      \   'ruby': ['solargraph', 'ruby', 'rubocop']
+      \}
+
+let g:ale_rust_cargo_use_check = 1
+
 """"""""""""
 " vim-test "
 """"""""""""
 map <Leader>r :TestFile<CR>
 map <Leader>e :TestNearest<CR>
+map <Leader>w :TestLast<CR>
 let test#strategy = "vimux"
 let test#neovim#term_position = "belowright"
 

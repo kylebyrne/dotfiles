@@ -12,8 +12,6 @@ source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 # Aliases
 alias vi="nvim"
 alias vim="nvim"
-alias rake="bundle exec rake"
-alias rspec="bundle exec rspec"
 alias fuckedit="git add . && git commit --amend --no-edit && git push -f && fortune | cowsay | lolcat "
 alias new_db="rake db:drop db:create && pg_restore --no-privileges --no-owner -d marketplace_development --if-exists --clean < ./latest.dump"
 
@@ -27,8 +25,7 @@ setopt append_history
 export TERM=xterm-256color
 
 # Setup for autojump
-
-[ -f $HOME/.nix-profile/etc/profile.d/autojump.sh ] && . $HOME/.nix-profile/etc/profile.d/autojump.sh
+[ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
 
 # SCM Breeze install
 # [ -s "$HOME/.scm_breeze/scm_breeze.sh" ] && source "$HOME/.scm_breeze/scm_breeze.sh"
@@ -38,27 +35,9 @@ export TERM=xterm-256color
 # Initialize fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-export FZF_DEFAULT_COMMAND="rg --files --follow --hidden --glob '!.git/*' --glob \
-  '!sorbet/**' --glob '!tags' --glob '!yarn.lock' --glob '!package.json'"
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-
-export EDITOR=/Users/kyle/.nix-profile/bin/nvim
-
-if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
-  . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
-fi
-
-# # export DIRENV_LOG_FORMAT=
-# export DIRENV_LOG_FORMAT="$(printf "\033[35mdirenv: %%s\033[0m")"
-eval "$(direnv hook zsh)"
-
-
 # Initialize starship prompt
 eval "$(starship init zsh)"
 
-
-export NIX_PATH=$HOME/.nix-defexpr/channels${NIX_PATH:+:}$NIX_PATH
-# export NIX_SSL_CERT_FILE=/usr/local/etc/openssl/cert.pem  
 
 really_test() {
   TIMES=${2:-10}
