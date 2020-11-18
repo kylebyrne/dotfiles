@@ -34,6 +34,9 @@ for config in $config_files; do
     fi
 done
 
+# Hammerspoon config doesn't live in config but its nicer for dots
+ln -s ~/.config/hammerspoon ~/.hammerspoon
+
 # create vim symlinks
 # As I have moved off of vim as my full time editor in favor of neovim,
 # I feel it doesn't make sense to leave my vimrc intact in the dotfiles repo
