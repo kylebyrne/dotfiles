@@ -189,6 +189,8 @@ let g:ale_linters = {
       \   'ruby': ['solargraph', 'ruby', 'rubocop']
       \}
 
+let g:ale_ruby_rubocop_options = '--force-exclusions'
+
 let g:ale_rust_cargo_use_check = 1
 
 """"""""""""
