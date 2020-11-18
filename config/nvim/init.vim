@@ -242,6 +242,12 @@ au BufWritePost *.ts if ! s:quitting | Neomake | else | echom "Neomake disabled"
 let g:neomake_warning_sign = {'text': '?'}
 let g:neomake_error_sign={'texthl': 'NeomakeErrorMsg'}
 
+
+"""""""""""""""""""""""
+" vim-highlightedyank "
+"""""""""""""""""""""""
+let g:highlightedyank_highlight_duration = 500
+
 """""""""""""""""""""
 " Terminal Settings "
 """""""""""""""""""""

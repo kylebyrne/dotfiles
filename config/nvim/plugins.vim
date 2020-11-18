@@ -79,6 +79,7 @@ function! VimrcLoadPlugins()
   " ------------
   Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
   Plug 'itchyny/lightline.vim'
+  Plug 'machakann/vim-highlightedyank'
 
   call plug#end()
 endfunction
