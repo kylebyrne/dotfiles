@@ -206,7 +206,7 @@ let test#neovim#term_position = "belowright"
 """""""
 " fzf "
 """""""
-nnoremap <Leader>t :FZF <CR>
+nnoremap <Leader>t :Files <CR>
 " let g:fzf_prefer_tmux = 1
 let g:fzf_layout = { 'tmux': '-p50%,40%' }
 """""""
