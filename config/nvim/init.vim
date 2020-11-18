@@ -78,7 +78,7 @@ set ignorecase
 set smartcase
 
 " Escape cleans the search highlight
-:nnoremap <ESC> :nohlsearch<cr>
+nnoremap <ESC> :nohlsearch<cr>
 
 " Shortcut to yank current file path
 nnoremap <leader>cf :let @+ = expand("%")<CR>
@@ -91,6 +91,9 @@ inoremap <c-j> <Esc>:m .+1<CR>==gi
 inoremap <c-k> <Esc>:m .-2<CR>==gi
 vnoremap <c-j> :m '>+1<CR>gv=gv
 vnoremap <c-k> :m '<-2<CR>gv=gv
+
+" Use <space><space> to toggle to the last buffer
+nnoremap <leader><leader> <c-^>
 
 " ======================================================
 " ██████╗ ██╗     ██╗   ██╗ ██████╗ ██╗███╗   ██╗███████╗
