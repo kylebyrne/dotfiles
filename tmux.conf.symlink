@@ -1,5 +1,5 @@
-set -g default-command /run/current-system/sw/bin/zsh
-set -g default-shell /run/current-system/sw/bin/zsh
+set -g default-command /usr/local/bin/zsh
+set -g default-shell /usr/local/bin/zsh
 
 # modern colors
 set -g default-terminal "xterm-256color"

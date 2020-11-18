@@ -15,6 +15,9 @@ alias vim="nvim"
 alias fuckedit="git add . && git commit --amend --no-edit && git push -f && fortune | cowsay | lolcat "
 alias new_db="rake db:drop db:create && pg_restore --no-privileges --no-owner -d marketplace_development --if-exists --clean < ./latest.dump"
 
+export VISUAL=nvim
+export EDITOR="$VISUAL"
+
 # Turn off complete aliases to work with SCM Breeze
 setopt no_complete_aliases
 
@@ -34,6 +37,11 @@ export TERM=xterm-256color
 
 # Initialize fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# Setting fd as the default source for fzf
+export FZF_DEFAULT_COMMAND='rg --files'
+
+# To apply the command to CTRL-T as well
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 # Initialize starship prompt
 eval "$(starship init zsh)"
@@ -43,3 +51,15 @@ really_test() {
   TIMES=${2:-10}
   for run in `seq $TIMES`; do rspec $1; [[ ! $? = 0 ]] && break ; done
 }
+
+
+export PATH="/usr/local/sbin:$PATH"
+
+. /usr/local/opt/asdf/asdf.sh
+
+# append completions to fpath
+fpath=(${ASDF_DIR}/completions $fpath)
+# initialise completions with ZSH's compinit
+autoload -Uz compinit
+compinit
+export PATH="/usr/local/opt/postgresql@12/bin:$PATH"
