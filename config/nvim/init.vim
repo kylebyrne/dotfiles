@@ -95,6 +95,10 @@ vnoremap <c-k> :m '<-2<CR>gv=gv
 " Use <space><space> to toggle to the last buffer
 nnoremap <leader><leader> <c-^>
 
+
+" Trigger git coauthor input with :Gca
+command! -nargs=+ Gca :r!git log -n100 --pretty=format:"\%an <\%ae>" | grep -i '<args>' | head -1 | xargs echo "Co-authored-by:"
+
 " ======================================================
 " ██████╗ ██╗     ██╗   ██╗ ██████╗ ██╗███╗   ██╗███████╗
 " ██╔══██╗██║     ██║   ██║██╔════╝ ██║████╗  ██║██╔════╝
