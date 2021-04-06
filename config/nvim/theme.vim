@@ -5,24 +5,27 @@ function! VimrcLoadTheme()
   endif
 
   function! MyHighlights() abort
-    highlight Normal ctermbg=NONE guibg=NONE
-    highlight LineNr ctermfg=NONE guibg=NONE
-    highlight CursorLineNr ctermfg=NONE guibg=NONE
-    highlight NeomakeVirtualtextError guibg=NONE guifg=red
-		highlight NeomakeErrorMsg guibg=NONE guifg=red
-  endfunction
+    highlight SignColumn      guibg=#141414
+    highlight GitGutterAdd    guifg=#8E9C6B guibg=#141414
+    highlight GitGutterChange guifg=#CEA869 guibg=#141414
+    highlight GitGutterDelete guifg=#CF694C guibg=#141414
+    highlight PMenu guifg=#141414 guibg=#cf6a4c
+    highlight PMenuSel guifg=#141414 guibg=#cda869
+    highlight LineNr ctermfg=59 ctermbg=233 guifg=#5f5a60 guibg=#141414
+    highlight CursorLineNr guifg=#f8f8f8
+    highlight StatusLine ctermfg=59 ctermbg=233 guifg=#5f5a60 guibg=#141414
+    highlight StatusLineNC ctermfg=59 ctermbg=233 guifg=#5f5a60 guibg=#141414
+    highlight NonText ctermfg=59 ctermbg=233 guifg=#5f5a60 guibg=#141414
+    endfunction
 
   augroup MyColors
     autocmd!
     autocmd ColorScheme * call MyHighlights()
   augroup END
 
-  colorscheme challenger_deep
-  let g:lightline = { 'colorscheme': 'challenger_deep'}
-  let s:palette = g:lightline#colorscheme#{g:lightline.colorscheme}#palette
-  let s:palette.normal.middle = [ [ 'NONE', 'NONE', 'NONE', 'NONE' ] ]
-  let s:palette.inactive.middle = s:palette.normal.middle
-  let s:palette.tabline.middle = s:palette.normal.middle
+
+  colorscheme vwilight
+  let g:ruby_operators = 1
   syntax on
   set noshowmode
 endfunction
