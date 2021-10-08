@@ -18,7 +18,6 @@ for i, app in ipairs(singleapps) do
   hs.hotkey.bind({"cmd", "alt", "ctrl", "shift"}, app[1], function() launch(app[2]); k:exit(); end)
 end
 
--- ~/.hammerspoon/init.lua
 hs.loadSpoon("Lunette")
 customBindings = {
   leftHalf = {

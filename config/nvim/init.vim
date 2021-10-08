@@ -77,20 +77,9 @@ set scrolloff=3
 set ignorecase
 set smartcase
 
-" Escape cleans the search highlight
-nnoremap <ESC> :nohlsearch<cr>
-
 " Shortcut to yank current file path
 nnoremap <leader>cf :let @+ = expand("%")<CR>
 au BufRead,BufNewFile *.md setlocal textwidth=80
-
-" Move your lines about
-nnoremap <c-j> :m .+1<CR>==
-nnoremap <c-k> :m .-2<CR>==
-inoremap <c-j> <Esc>:m .+1<CR>==gi
-inoremap <c-k> <Esc>:m .-2<CR>==gi
-vnoremap <c-j> :m '>+1<CR>gv=gv
-vnoremap <c-k> :m '<-2<CR>gv=gv
 
 " Use <space><space> to toggle to the last buffer
 nnoremap <leader><leader> <c-^>
@@ -98,6 +87,9 @@ nnoremap <leader><leader> <c-^>
 
 " Trigger git coauthor input with :Gca
 command! -nargs=+ Gca :r!git log -n100 --pretty=format:"\%an <\%ae>" | grep -i '<args>' | head -1 | xargs echo "Co-authored-by:"
+
+" Open notes file in new tab
+nmap <script>n<CR> <SID>:tab drop tmp/notes.md<CR>
 
 " ======================================================
 " ██████╗ ██╗     ██╗   ██╗ ██████╗ ██╗███╗   ██╗███████╗
@@ -126,56 +118,6 @@ autocmd Filetype coffeescript setlocal ts=4 sw=4 sts=0 expandtab
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
 nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
-
-"""""""
-" LSP "
-"""""""
-function! s:on_lsp_buffer_enabled() abort
-  setlocal omnifunc=lsp#complete
-  setlocal signcolumn=yes
-  echom "loaded"
-  " Find definition of word under cursor
-  nnoremap <buffer> <leader>ld :LspDefinition<CR>
-  " Find callers of word under cursor
-  nnoremap <buffer> <leader>lr :LspReferences<CR>
-  " Rename symbol throughout project
-  nnoremap <buffer> <leader>lR :LspRename<CR>
-  " Show docs (e.g. from libraries)
-  nnoremap <buffer> <leader>lK :LspHover<CR>
-  " Format document layout
-  nnoremap <buffer> <leader>lf :LspDocumentFormat<CR>
-endfunction
-augroup lsp_install
-    au!
-    " call s:on_lsp_buffer_enabled only for languages that has the server registered.
-    autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
-augroup END
-
-" Address (likely temporary bug) whereby LSP completions with asyncomplete
-" Ate two characters following insertion
-let g:lsp_text_edit_enabled = 0
-" Ruby lsp
-" Prerequisites:
-" > gem install solargraph
-au User lsp_setup call lsp#register_server({
-      \ 'name': 'solargraph',
-      \ 'cmd': {server_info->[&shell, &shellcmdflag, 'bundle exec solargraph stdio']},
-      \ 'initialization_options': {"diagnostics": "true"},
-      \ 'whitelist': ['ruby'],
-      \ })
-
-" JavaScript and Typescript LSP
-" Prerequisites:
-" $ npm install -g typescript typescript-language-server
-if executable('typescript-language-server')
-    au User lsp_setup call lsp#register_server({
-      \ 'name': 'javascript support using typescript-language-server',
-      \ 'cmd': { server_info->[&shell, &shellcmdflag, 'typescript-language-server --stdio']},
-      \ 'root_uri': { server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_directory(lsp#utils#get_buffer_path(), '.git/..'))},
-      \ 'whitelist': ['javascript', 'javascript.jsx', 'javascriptreact']
-      \ })
-endif
-
 
 """""""
 " ALE "
@@ -211,6 +153,7 @@ let test#neovim#term_position = "belowright"
 " fzf "
 """""""
 nnoremap <Leader>t :Files <CR>
+nnoremap <Leader>b :Buffers <CR>
 " let g:fzf_prefer_tmux = 1
 let g:fzf_layout = { 'tmux': '-p50%,40%' }
 """""""
@@ -229,25 +172,144 @@ let NERDTreeIgnore=['\.DS_Store', '\~$', '\.swp']
 let NERDTreeShowHidden = 1
 
 
-"""""""""""
-" Neomake "
-"""""""""""
-" Gross hack to stop Neomake running when exitting because it creates a zombie cargo check process
-" which holds the lock and never exits. But then, if you only have QuitPre, closing one pane will
-" disable neomake, so BufEnter reenables when you enter another buffer.
-autocmd BufNewFile *.rs Neomake rustc
-let s:quitting = 0
-au QuitPre *.rs let s:quitting = 1
-au BufEnter *.rs let s:quitting = 0
-au BufWritePost *.rs if ! s:quitting | Neomake | else | echom "Neomake disabled"| endif
-au QuitPre *.ts let s:quitting = 1
-au BufEnter *.ts let s:quitting = 0
-au BufWritePost *.ts if ! s:quitting | Neomake | else | echom "Neomake disabled"| endif
-let g:neomake_warning_sign = {'text': '?'}
-let g:neomake_error_sign={'texthl': 'NeomakeErrorMsg'}
-
-
 """""""""""""""""""""""
 " vim-highlightedyank "
 """""""""""""""""""""""
 let g:highlightedyank_highlight_duration = 500
+
+"""""""""""""""""
+" git-messenger "
+"""""""""""""""""
+let g:git_messenger_include_diff = "current"
+let g:git_messenger_always_into_popup = v:true
+let g:git_messenger_max_popup_height = 35
+
+""""""""""""""""""
+" nvim lsp "
+" """"""""""
+set completeopt=menuone,noinsert,noselect
+" Use <Tab> and <S-Tab> to navigate through popup menu
+" inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+" inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+lua << EOF
+local nvim_lsp = require('lspconfig')
+
+-- Use an on_attach function to only map the following keys
+-- after the language server attaches to the current buffer
+local on_attach = function(client, bufnr)
+  print('Attaching LSP: ' .. client.name)
+  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+  local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
+
+  --Enable completion triggered by <c-x><c-o>
+  buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+
+  -- Mappings.
+  local opts = { noremap=true, silent=true }
+
+  -- See `:help vim.lsp.*` for documentation on any of the below functions
+  buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+  buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+  buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+  buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+  buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+  buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+  buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+  buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
+  buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
+  buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
+end
+
+-- Use a loop to conveniently call 'setup' on multiple servers and
+-- map buffer local keybindings when the language server attaches
+nvim_lsp.solargraph.setup {
+  on_attach = on_attach,
+  filetypes = {"ruby", "rakefile"},
+  root_dir = nvim_lsp.util.root_pattern("Gemfile", ".git", "."),
+  settings = {
+    solargraph = {
+      autoformat = true,
+      completion = true,
+      diagnostic = true,
+      folding = true,
+      references = true,
+      rename = true,
+      symbols = true
+      }
+    }
+  }
+nvim_lsp.tsserver.setup{}
+
+local saga = require 'lspsaga'
+saga.init_lsp_saga { }
+
+EOF
+
+nnoremap <silent>K <Cmd>Lspsaga hover_doc<CR>
+nnoremap <silent>S <Cmd>Lspsaga signature_help<CR>
+nnoremap <silent> gh <Cmd>Lspsaga lsp_finder<CR>
+nnoremap <silent> R <Cmd>Lspsaga rename<CR>
+nnoremap <silent> N <Cmd>Lspsaga diagnostic_jump_next<CR>
+
+
+"Treesitter
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  highlight = {
+    enable = true,
+    disable = {},
+  },
+  indent = {
+    enable = false,
+    disable = {},
+  },
+  ensure_installed = {
+    "ruby",
+    "javascript",
+    "json",
+    "yaml",
+    "html",
+    "scss"
+  },
+}
+
+local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
+parser_config.ruby.used_by = { "ruby" }
+parser_config.tsx.used_by = { "javascript", "typescript.tsx" }
+EOF
+
+
+lua <<EOF
+-- Set completeopt to have a better completion experience
+vim.opt.completeopt = {"menuone", "longest", "preview"}
+
+-- nvim-cmp setup
+local cmp = require 'cmp'
+cmp.setup {
+  mapping = {
+    ['<C-p>'] = cmp.mapping.select_prev_item(),
+    ['<C-n>'] = cmp.mapping.select_next_item(),
+    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<C-e>'] = cmp.mapping.close(),
+    ['<Tab>'] = function(fallback)
+      if vim.fn.pumvisible() == 1 then
+        vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<C-n>', true, true, true), 'n')
+      else
+        fallback()
+      end
+    end,
+    ['<S-Tab>'] = function(fallback)
+      if vim.fn.pumvisible() == 1 then
+        vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<C-p>', true, true, true), 'n')
+      else
+        fallback()
+      end
+    end,
+  },
+  sources = {
+    { name = 'buffer' }
+  },
+}
+EOF
