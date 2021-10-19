@@ -14,12 +14,8 @@ function! VimrcLoadPlugins()
 
   " General NeoVIM improvements
   " ------------------------
-  " Fzf for fuzzy finding
-  Plug 'junegunn/fzf', { 'do': 'yes \| ./install --all' }
-  Plug 'junegunn/fzf.vim'
-
-  "Ack for acking
-  Plug 'mileszs/ack.vim'
+  Plug 'nvim-lua/plenary.nvim'
+  Plug 'nvim-telescope/telescope.nvim'
 
   "Nerdtree for interacting with file system
   Plug 'scrooloose/nerdtree'

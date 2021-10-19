@@ -154,15 +154,14 @@ let test#neovim#term_position = "belowright"
 """""""
 nnoremap <Leader>t :Files <CR>
 nnoremap <Leader>b :Buffers <CR>
-" let g:fzf_prefer_tmux = 1
-let g:fzf_layout = { 'tmux': '-p50%,40%' }
-"""""""
-" Ack "
-"""""""
-nnoremap <Leader>f :Ack ''<left>
-" make ack.vim use the thesilversearcher
-let g:ackprg = 'rg --vimgrep --no-heading'
 
+"""""""""""""
+" Telescope "
+"""""""""""""
+" Find files using Telescope command-line sugar.
+nnoremap <leader>t <cmd>Telescope git_files<cr>
+nnoremap <leader>b <cmd>Telescope buffers<cr>
+nnoremap <leader>f <cmd>Telescope live_grep<cr>
 
 """"""""""""
 " Nerdtree "
