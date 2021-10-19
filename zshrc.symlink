@@ -16,6 +16,7 @@ alias fuckedit="git add . && git commit --amend --no-edit && git push -f && fort
 alias new_db=" DISABLE_DATABASE_ENVIRONMENT_CHECK=1 bin/rails db:drop db:create && pg_restore --no-privileges --no-owner -d marketplace_development --if-exists --clean < ./latest.dump"
 
 alias reset_postgres="rm /usr/local/var/postgresql@12/postmaster.pid"
+alias reset_audio="sudo launchctl stop com.apple.audio.coreaudiod && sudo launchctl start com.apple.audio.coreaudio"
 
 alias grc="git rebase --continue"
 alias gra="git rebase --abort"
