@@ -4,17 +4,7 @@ function! VimrcLoadTheme()
     set termguicolors
   endif
 
-  function! MyHighlights() abort
-    "Tweaks currently live in colors/vwilight.vim
-  endfunction
-
-  augroup MyColors
-    autocmd!
-    autocmd ColorScheme * call MyHighlights()
-  augroup END
-
-
-  colorscheme vwilight
+  colorscheme kbyrne
   let g:ruby_operators = 1
   syntax on
   set noshowmode

@@ -313,3 +313,4 @@ cmp.setup {
   },
 }
 EOF
+nmap <leader>h :TSHighlightCapturesUnderCursor<CR>
