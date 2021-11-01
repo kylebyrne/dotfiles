@@ -20,6 +20,7 @@ brew 'overmind'
 brew 'gpg'
 brew 'ripgrep'
 brew 'fzf'
+brew 'wifi-password'
 
 tap 'heroku/brew'
 brew 'heroku'
