@@ -16,6 +16,8 @@ function! VimrcLoadPlugins()
   " ------------------------
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope.nvim'
+  "Ack for acking
+  Plug 'mileszs/ack.vim'
 
   "Nerdtree for interacting with file system
   Plug 'scrooloose/nerdtree'

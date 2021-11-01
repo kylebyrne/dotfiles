@@ -155,13 +155,35 @@ let test#neovim#term_position = "belowright"
 nnoremap <Leader>t :Files <CR>
 nnoremap <Leader>b :Buffers <CR>
 
+"""""""
+" Ack "
+"""""""
+nnoremap <Leader>f :Ack ''<left>
+" make ack.vim use the thesilversearcher
+let g:ackprg = 'rg --vimgrep --no-heading'
+
 """""""""""""
 " Telescope "
 """""""""""""
 " Find files using Telescope command-line sugar.
 nnoremap <leader>t <cmd>Telescope git_files<cr>
 nnoremap <leader>b <cmd>Telescope buffers<cr>
-nnoremap <leader>f <cmd>Telescope live_grep<cr>
+
+lua <<EOF
+require('dash').setup({
+      dash_app_path = '/Applications/Setapp/Dash.app',
+      debounce = 750,
+      file_type_keywords = {
+        dashboard = false,
+        NvimTree = false,
+        TelescopePrompt = false,
+        terminal = false,
+        packer = false,
+        javascript = { 'javascript', 'nodejs' },
+        ruby = { 'ruby', 'rails' },
+      },
+    })
+EOF
 
 """"""""""""
 " Nerdtree "
