@@ -73,6 +73,8 @@ function! VimrcLoadPlugins()
   Plug 'itchyny/lightline.vim'
   Plug 'machakann/vim-highlightedyank'
 
+  Plug 'github/copilot.vim'
+
   call plug#end()
 endfunction
 
