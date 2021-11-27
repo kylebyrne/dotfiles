@@ -115,8 +115,6 @@ set completeopt-=preview
 let g:rustfmt_autosave = 1
 autocmd Filetype coffeescript setlocal ts=4 sw=4 sts=0 expandtab
 
-inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
-
 nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
 
 """""""
@@ -319,3 +317,7 @@ cmp.setup {
 }
 EOF
 nmap <leader>h :TSHighlightCapturesUnderCursor<CR>
+
+" Copilot "
+imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
+let g:copilot_no_tab_map = v:true
