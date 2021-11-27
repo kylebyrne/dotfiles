@@ -1,16 +1,3 @@
-
-" Load plugins
-" ----------------------------------------------------------------------
-
-" Load plugin file …
-exec 'source ~/.config/nvim/plugins.vim'
-" … and execute
-call VimrcLoadPlugins()
-
-set nocompatible
-
-" ============================================
-" ████████╗██╗  ██╗███████╗███╗   ███╗███████╗
 " ╚══██╔══╝██║  ██║██╔════╝████╗ ████║██╔════╝
 "    ██║   ███████║█████╗  ██╔████╔██║█████╗  
 "    ██║   ██╔══██║██╔══╝  ██║╚██╔╝██║██╔══╝  
@@ -89,226 +76,37 @@ nnoremap <leader><leader> <c-^>
 command! -nargs=+ Gca :r!git log -n100 --pretty=format:"\%an <\%ae>" | grep -i '<args>' | head -1 | xargs echo "Co-authored-by:"
 
 
-" ======================================================
-" ██████╗ ██╗     ██╗   ██╗ ██████╗ ██╗███╗   ██╗███████╗
-" ██╔══██╗██║     ██║   ██║██╔════╝ ██║████╗  ██║██╔════╝
-" ██████╔╝██║     ██║   ██║██║  ███╗██║██╔██╗ ██║███████╗
-" ██╔═══╝ ██║     ██║   ██║██║   ██║██║██║╚██╗██║╚════██║
-" ██║     ███████╗╚██████╔╝╚██████╔╝██║██║ ╚████║███████║
-" ╚═╝     ╚══════╝ ╚═════╝  ╚═════╝ ╚═╝╚═╝  ╚═══╝╚══════╝
-" ======================================================
+" Plugins
+"--------------------------------------------------------------------------
 
+" Automatically install vim-plug
+if empty(glob('~/.config/nvim/autoload/plug.vim'))
+  silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
+        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
 
-""""""""""""
-" Deoplete "
-""""""""""""
-let g:deoplete#enable_at_startup = 1
-let g:LanguageClient_serverCommands = {
-        \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
-        \ 'ruby': ['solargraph', 'stdio'],
-        \ }
-autocmd CompleteDone * silent! pclose!
-autocmd FileType ruby setlocal omnifunc=LanguageClient#complete
-set completeopt-=preview
-let g:rustfmt_autosave = 1
-autocmd Filetype coffeescript setlocal ts=4 sw=4 sts=0 expandtab
+call plug#begin()
+  source ~/.config/nvim/plugins/ack.vim
+  source ~/.config/nvim/plugins/cmp.vim
+  source ~/.config/nvim/plugins/commentary.vim
+  source ~/.config/nvim/plugins/copilot.vim
+  source ~/.config/nvim/plugins/endwise.vim
+  source ~/.config/nvim/plugins/fugitive.vim
+  source ~/.config/nvim/plugins/fzf.vim
+  source ~/.config/nvim/plugins/git_messenger.vim
+  source ~/.config/nvim/plugins/highlighted_yank.vim
+  source ~/.config/nvim/plugins/lightline.vim
+  source ~/.config/nvim/plugins/lspconfig.vim
+  source ~/.config/nvim/plugins/nerdtree.vim
+  source ~/.config/nvim/plugins/rhubarb.vim
+  source ~/.config/nvim/plugins/surround.vim
+  source ~/.config/nvim/plugins/test.vim
+  source ~/.config/nvim/plugins/tmux_navigator.vim
+  source ~/.config/nvim/plugins/treesitter.vim
+  source ~/.config/nvim/plugins/vimux.vim
+call plug#end()
 
-nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+doautocmd User PlugLoaded
 
-"""""""
-" ALE "
-"""""""
-let g:ale_completion_enabled = 0
-
-let g:ale_fix_on_save = 1
-
-let g:ale_fixers = {
-      \ 'ruby': ['rubocop'],
-      \ 'javascript': ['eslint']
-      \ }
-let g:ale_linters = {
-      \   'javascript': ['eslint'],
-      \   'ruby': ['solargraph', 'ruby', 'rubocop']
-      \}
-
-let g:ale_ruby_rubocop_options = '--force-exclusions'
-
-let g:ale_rust_cargo_use_check = 1
-
-""""""""""""
-" vim-test "
-""""""""""""
-map <Leader>r :TestFile<CR>
-map <Leader>e :TestNearest<CR>
-map <Leader>w :TestLast<CR>
-let test#strategy = "vimux"
-let test#neovim#term_position = "belowright"
-
-
-"""""""
-" fzf "
-"""""""
-nnoremap <Leader>t :Files <CR>
-nnoremap <Leader>b :Buffers <CR>
-
-"""""""
-" Ack "
-"""""""
-nnoremap <Leader>f :Ack ''<left>
-" make ack.vim use the thesilversearcher
-let g:ackprg = 'rg --vimgrep --no-heading'
-
-""""""""""""
-" Nerdtree "
-""""""""""""
-nmap <leader>n :NERDTreeToggle<CR>
-let NERDTreeIgnore=['\.DS_Store', '\~$', '\.swp']
-let NERDTreeShowHidden = 1
-
-
-"""""""""""""""""""""""
-" vim-highlightedyank "
-"""""""""""""""""""""""
-let g:highlightedyank_highlight_duration = 500
-
-"""""""""""""""""
-" git-messenger "
-"""""""""""""""""
-let g:git_messenger_include_diff = "current"
-let g:git_messenger_always_into_popup = v:true
-let g:git_messenger_max_popup_height = 35
-
-""""""""""""""""""
-" nvim lsp "
-" """"""""""
-set completeopt=menuone,noinsert,noselect
-" Use <Tab> and <S-Tab> to navigate through popup menu
-" inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
-" inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-lua << EOF
-local nvim_lsp = require('lspconfig')
-
--- Use an on_attach function to only map the following keys
--- after the language server attaches to the current buffer
-local on_attach = function(client, bufnr)
-  print('Attaching LSP: ' .. client.name)
-  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-  local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
-
-  --Enable completion triggered by <c-x><c-o>
-  buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
-
-  -- Mappings.
-  local opts = { noremap=true, silent=true }
-
-  -- See `:help vim.lsp.*` for documentation on any of the below functions
-  buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-  buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
-  buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
-  buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-  buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-  buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-  buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-  buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
-  buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
-  buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
-end
-
--- Use a loop to conveniently call 'setup' on multiple servers and
--- map buffer local keybindings when the language server attaches
-nvim_lsp.solargraph.setup {
-  on_attach = on_attach,
-  filetypes = {"ruby", "rakefile"},
-  root_dir = nvim_lsp.util.root_pattern("Gemfile", ".git", "."),
-  settings = {
-    solargraph = {
-      autoformat = true,
-      completion = true,
-      diagnostic = true,
-      folding = true,
-      references = true,
-      rename = true,
-      symbols = true
-      }
-    }
-  }
-nvim_lsp.tsserver.setup{}
-
-local saga = require 'lspsaga'
-saga.init_lsp_saga { }
-
-EOF
-
-nnoremap <silent>K <Cmd>Lspsaga hover_doc<CR>
-nnoremap <silent>S <Cmd>Lspsaga signature_help<CR>
-nnoremap <silent> gh <Cmd>Lspsaga lsp_finder<CR>
-nnoremap <silent> R <Cmd>Lspsaga rename<CR>
-nnoremap <silent> N <Cmd>Lspsaga diagnostic_jump_next<CR>
-
-
-"Treesitter
-lua <<EOF
-require'nvim-treesitter.configs'.setup {
-  highlight = {
-    enable = true,
-    disable = {},
-  },
-  indent = {
-    enable = false,
-    disable = {},
-  },
-  ensure_installed = {
-    "ruby",
-    "javascript",
-    "json",
-    "yaml",
-    "html",
-    "scss"
-  },
-}
-
-local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
-parser_config.ruby.used_by = { "ruby" }
-parser_config.tsx.used_by = { "javascript", "typescript.tsx" }
-EOF
-
-
-lua <<EOF
--- Set completeopt to have a better completion experience
-vim.opt.completeopt = {"menuone", "longest", "preview"}
-
--- nvim-cmp setup
-local cmp = require 'cmp'
-cmp.setup {
-  mapping = {
-    ['<C-p>'] = cmp.mapping.select_prev_item(),
-    ['<C-n>'] = cmp.mapping.select_next_item(),
-    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-    ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    ['<C-Space>'] = cmp.mapping.complete(),
-    ['<C-e>'] = cmp.mapping.close(),
-    ['<Tab>'] = function(fallback)
-      if vim.fn.pumvisible() == 1 then
-        vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<C-n>', true, true, true), 'n')
-      else
-        fallback()
-      end
-    end,
-    ['<S-Tab>'] = function(fallback)
-      if vim.fn.pumvisible() == 1 then
-        vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<C-p>', true, true, true), 'n')
-      else
-        fallback()
-      end
-    end,
-  },
-  sources = {
-    { name = 'buffer' }
-  },
-}
-EOF
-nmap <leader>h :TSHighlightCapturesUnderCursor<CR>
-
-" Copilot "
-imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
-let g:copilot_no_tab_map = v:true
+"--------------------------------------------------------------------------
