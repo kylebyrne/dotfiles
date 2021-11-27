@@ -4,3 +4,5 @@ config/nvim/plugged/*
 **/*.lock.json
 .DS_Store
 .fseventsd
+.TemporaryItems/
+.DocumentRevisions-V100/
