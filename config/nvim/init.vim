@@ -73,6 +73,7 @@ call plug#begin()
   source ~/.config/nvim/plugins/fugitive.vim
   source ~/.config/nvim/plugins/fzf.vim
   source ~/.config/nvim/plugins/git_messenger.vim
+  source ~/.config/nvim/plugins/heritage.vim
   source ~/.config/nvim/plugins/highlighted_yank.vim
   source ~/.config/nvim/plugins/lightline.vim
   source ~/.config/nvim/plugins/lspconfig.vim
