@@ -88,8 +88,6 @@ nnoremap <leader><leader> <c-^>
 " Trigger git coauthor input with :Gca
 command! -nargs=+ Gca :r!git log -n100 --pretty=format:"\%an <\%ae>" | grep -i '<args>' | head -1 | xargs echo "Co-authored-by:"
 
-" Open notes file in new tab
-nmap <script>n<CR> <SID>:tab drop tmp/notes.md<CR>
 
 " ======================================================
 " ██████╗ ██╗     ██╗   ██╗ ██████╗ ██╗███╗   ██╗███████╗
@@ -159,13 +157,6 @@ nnoremap <Leader>b :Buffers <CR>
 nnoremap <Leader>f :Ack ''<left>
 " make ack.vim use the thesilversearcher
 let g:ackprg = 'rg --vimgrep --no-heading'
-
-"""""""""""""
-" Telescope "
-"""""""""""""
-" Find files using Telescope command-line sugar.
-nnoremap <leader>t <cmd>Telescope git_files<cr>
-nnoremap <leader>b <cmd>Telescope buffers<cr>
 
 """"""""""""
 " Nerdtree "
