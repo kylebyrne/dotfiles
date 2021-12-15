@@ -7,3 +7,4 @@ latest.dump.*
 **/.DS_Store
 config/definitions.rb
 .env
+.projections.json
