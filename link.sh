@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-DOTFILES=/dots
+DOTFILES=~/dotfiles
 
 echo -e "\\nCreating symlinks"
 echo "=============================="

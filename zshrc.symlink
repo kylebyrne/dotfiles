@@ -4,10 +4,10 @@ export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/.platformio/penv/bin:$PATH"
 export PATH=".git/safe/../../bin:$PATH"
 
-source /usr/local/share/zsh-history-substring-search/zsh-history-substring-search.zsh
+source /opt/homebrew/share/zsh-history-substring-search/zsh-history-substring-search.zsh
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
-source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # Aliases
 alias vi="nvim"
@@ -37,7 +37,7 @@ setopt append_history
 export TERM=xterm-256color
 
 # Setup for autojump
-[ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
+[ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
 
 # SCM Breeze install
 # [ -s "$HOME/.scm_breeze/scm_breeze.sh" ] && source "$HOME/.scm_breeze/scm_breeze.sh"
@@ -64,7 +64,7 @@ really_test() {
 
 export PATH="/usr/local/sbin:$PATH"
 
-. /usr/local/opt/asdf/asdf.sh
+. /opt/homebrew/opt/asdf/libexec/asdf.sh
 export PATH="$HOME/.asdf/shims:$PATH"
 
 # append completions to fpath
@@ -74,7 +74,3 @@ autoload -Uz compinit
 compinit
 export PATH="/usr/local/opt/postgresql@12/bin:$PATH"
 
-# echo -e 'if command -v pyenv 1>/dev/null 2>&1; then\n  eval "$(pyenv init -)"\nfi' >> ~/.bash_profile
-
-export PATH="/Users/kylebyrne/.pyenv:$PATH"
-eval "$(pyenv init -)"
