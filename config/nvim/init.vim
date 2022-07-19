@@ -76,6 +76,7 @@ call plug#begin()
   source ~/.config/nvim/plugins/heritage.vim
   source ~/.config/nvim/plugins/highlighted_yank.vim
   source ~/.config/nvim/plugins/lightline.vim
+  source ~/.config/nvim/plugins/vim_livedown.vim
   source ~/.config/nvim/plugins/lspconfig.vim
   source ~/.config/nvim/plugins/pasta.vim
   source ~/.config/nvim/plugins/nerdtree.vim
