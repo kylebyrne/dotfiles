@@ -8,3 +8,4 @@ latest.dump.*
 config/definitions.rb
 .env
 .projections.json
+.tool-versions

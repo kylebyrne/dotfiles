@@ -7,7 +7,8 @@ email = kyletbyrne96@gmail.com
 	verbose = true
 [core]
 	attributesfile = /Users/kyle/.gitattributes
-	excludesfile = /Users/kyle/.gitignore_global
+	excludesfile = /Users/kylebyrne/.gitignore_global
+  pager = delta
 [alias]
 	delete-merged = !git branch --merged main | egrep -v \"(^\\*|^  main$)\" | xargs git branch --delete
 	delete-gone = !git fetch --prune && git branch --verbose | awk '/\\[gone]/{print $1}' |  xargs git branch --delete --force
@@ -22,8 +23,13 @@ email = kyletbyrne96@gmail.com
 	web-url = "!funct() { git config remote.origin.url | sed -e\"s/git@/https:\\/\\//\" -e\"s/\\.git$//\" | sed -E \"s/(\\/\\/[^:]*):/\\1\\//\"; }; funct"
 	pr = "!funct() { open \"`git web-url`/pull/`git pr-number $1`\" ;}; funct"
   compare = "!f() { BRANCH=$(git branch --show-current); open \"`git web-url`/compare/${BRANCH}\"; }; f"
+  lint = !sh -c 'bundle exec rubocop -A $(git changed-files | grep .rb)'
+  changed-files = !sh -c 'git diff --name-only HEAD HEAD~1'
+  staged-files = !sh -c 'git diff --name-only HEAD'
+  lint-changed = !sh -c 'bundle exec rubocop -A $(git staged-files | grep .rb)'
 [init]
 	templatedir = ~/.git_template
+	defaultBranch = main
 [rebase]
 	autosquash = true
 [fetch]
