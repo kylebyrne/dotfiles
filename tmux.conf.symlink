@@ -1,9 +1,12 @@
-set -g default-command /usr/local/bin/zsh
-set -g default-shell /usr/local/bin/zsh
-
-# modern colors
-set -g default-terminal "xterm-256color"
+## modern colors
+# set -g default-terminal "xterm-256color"
+set -g default-terminal tmux-256color
 set -ga terminal-overrides ",alacritty:Tc"
+
+# move x clipboard into tmux paste buffer
+bind C-p run "tmux set-buffer \"$(pbpaste)\"; tmux paste-buffer"
+# move tmux copy buffer into x clipboard
+bind C-y run "tmux show-buffer | pbcopy"
 
 # set-option -g default-command "reattach-to-user-namespace -l zsh"
 
@@ -13,26 +16,25 @@ set -ga terminal-overrides ",alacritty:Tc"
 # bind C-a send-prefix
 
 set-window-option -g mode-keys vi
-set -g default-command "reattach-to-user-namespace -l ${SHELL}"
 
 bind-key -T copy-mode-vi 'v' send-keys -X begin-selection 
 bind-key -T copy-mode-vi 'y' send-keys -X copy-pipe-and-cancel 'reattach-to-user-namespace pbcopy'
 
-# Avoid ESC delay
+## Avoid ESC delay
 set -s escape-time 0
 
-# Fix titlebar
+## Fix titlebar
 set -g set-titles on
 set -g set-titles-string "#T"
 
-# Mouse friendly
+## Mouse friendly
 set -g mouse on
 
-######################
-### DESIGN CHANGES ###
-######################
+#######################
+#### DESIGN CHANGES ###
+#######################
 
-# Avoid date/time taking up space
+## Avoid date/time taking up space
 set -g status-right ''
 set -g status-right-length 0
 
@@ -59,8 +61,8 @@ set -g default-terminal "tmux-256color"
 set -ga terminal-overrides ",*col*:Tc"
 
 set -g status-interval 5
-set -g status-bg colour0
-set -g status-fg colour7
+# set -g status-bg colour0
+# set -g status-fg colour7
 set -g status-left ''
 set -g status-right ''
 set -g status-right "#[fg=orange]#(curl -s https://am.i.mullvad.net/json | jq -r ".city") #[fg=green]#(cd #{pane_current_path}; git rev-parse --abbrev-ref HEAD)"

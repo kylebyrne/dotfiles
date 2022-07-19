@@ -10,12 +10,13 @@ bindkey '^[[B' history-substring-search-down
 source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # Aliases
+alias be="bundle exec"
 alias vi="nvim"
 alias vim="nvim"
 alias fuckedit="git add . && git commit --amend --no-edit && git push -f && fortune | cowsay | lolcat "
 alias new_db=" DISABLE_DATABASE_ENVIRONMENT_CHECK=1 bin/rails db:drop db:create && pg_restore --no-privileges --no-owner -d marketplace_development --if-exists --clean < ./latest.dump"
 
-alias reset_postgres="rm /usr/local/var/postgresql@12/postmaster.pid"
+alias reset_postgres="rm /opt/homebrew/var/postgres/postmaster.pid"
 alias reset_audio="sudo launchctl stop com.apple.audio.coreaudiod && sudo launchctl start com.apple.audio.coreaudio"
 
 alias grc="git rebase --continue"
@@ -58,7 +59,7 @@ eval "$(starship init zsh)"
 
 really_test() {
   TIMES=${2:-10}
-  for run in `seq $TIMES`; do spring rspec $1; [[ ! $? = 0 ]] && break ; done
+  for run in `seq $TIMES`; do bundle exec rspec $1; [[ ! $? = 0 ]] && break ; done
 }
 
 
@@ -74,3 +75,12 @@ autoload -Uz compinit
 compinit
 export PATH="/usr/local/opt/postgresql@12/bin:$PATH"
 
+
+[ -s "/Users/kylebyrne/.scm_breeze/scm_breeze.sh" ] && source "/Users/kylebyrne/.scm_breeze/scm_breeze.sh"
+
+# bun completions
+[ -s "/Users/kylebyrne/.bun/_bun" ] && source "/Users/kylebyrne/.bun/_bun"
+
+# Bun
+export BUN_INSTALL="/Users/kylebyrne/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
