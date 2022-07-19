@@ -85,6 +85,7 @@ call plug#begin()
   source ~/.config/nvim/plugins/tmux_navigator.vim
   source ~/.config/nvim/plugins/treesitter.vim
   source ~/.config/nvim/plugins/vimux.vim
+  source ~/.config/nvim/plugins/vim_maximizer.vim
 call plug#end()
 
 doautocmd User PlugLoaded
