@@ -6,12 +6,14 @@ end
 -- Keybinding for specific single apps.
 
 singleapps = {
-  {'f', 'Firefox'},
+  {'f', 'Arc'},
   {'t', 'Alacritty'},
   {'s', 'Slack'},
   {'p', 'Finder'},
   {'e', 'Spark'},
   {'d', 'Dash'},
+  {'w', 'Todoist'},
+  {'c', 'Cron'},
 }
 
 for i, app in ipairs(singleapps) do
