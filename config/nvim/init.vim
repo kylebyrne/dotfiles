@@ -26,7 +26,7 @@ filetype indent on
 "--------------------------------------------------------------------------
 
 " Trigger git coauthor input with :Gca
-command! -nargs=+ Gca :r!git log -n100 --pretty=format:"\%an <\%ae>" | grep -i '<args>' | head -1 | xargs echo "Co-authored-by:"
+command! -nargs=+ Gca :r!git log -n500 --pretty=format:"\%an <\%ae>" | grep -i '<args>' | head -1 | xargs echo "Co-authored-by:"
 "--------------------------------------------------------------------------
 
 " Mappings
