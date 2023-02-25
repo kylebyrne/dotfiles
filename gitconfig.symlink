@@ -24,7 +24,7 @@ email = kyletbyrne96@gmail.com
 	pr = "!funct() { open \"`git web-url`/pull/`git pr-number $1`\" ;}; funct"
   compare = "!f() { BRANCH=$(git branch --show-current); open \"`git web-url`/compare/${BRANCH}\"; }; f"
   lint = !sh -c 'bundle exec rubocop -A $(git changed-files | grep .rb)'
-  changed-files = !sh -c 'git diff --name-only HEAD HEAD~1'
+  changed-files = !sh -c 'git diff --diff-filter=MA --name-only HEAD~1 HEAD'
   staged-files = !sh -c 'git diff --name-only HEAD'
   lint-changed = !sh -c 'bundle exec rubocop -A $(git staged-files | grep .rb)'
 [init]

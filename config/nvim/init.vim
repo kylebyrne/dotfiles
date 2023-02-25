@@ -1,4 +1,3 @@
-colorscheme kbyrne
 let g:ruby_operators = 1
 syntax on
 set noshowmode
@@ -27,6 +26,8 @@ filetype indent on
 
 " Trigger git coauthor input with :Gca
 command! -nargs=+ Gca :r!git log -n500 --pretty=format:"\%an <\%ae>" | grep -i '<args>' | head -1 | xargs echo "Co-authored-by:"
+
+nmap gn :tab drop tmp/notes.md<CR>
 "--------------------------------------------------------------------------
 
 " Mappings
@@ -34,10 +35,10 @@ command! -nargs=+ Gca :r!git log -n500 --pretty=format:"\%an <\%ae>" | grep -i '
 let mapleader = "\<space>"
 
 " Easier split movement
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
+" nnoremap <C-J> <C-W><C-J>
+" nnoremap <C-K> <C-W><C-K>
+" nnoremap <C-L> <C-W><C-L>
+" nnoremap <C-H> <C-W><C-H>
 
 " Shortcut to yank current file path
 nnoremap <leader>cf :let @+ = expand("%")<CR>
@@ -66,9 +67,8 @@ endif
 
 call plug#begin()
   source ~/.config/nvim/plugins/ack.vim
-  source ~/.config/nvim/plugins/cmp.vim
   source ~/.config/nvim/plugins/commentary.vim
-  source ~/.config/nvim/plugins/copilot.vim
+  " source ~/.config/nvim/plugins/copilot.vim
   source ~/.config/nvim/plugins/endwise.vim
   source ~/.config/nvim/plugins/fugitive.vim
   source ~/.config/nvim/plugins/fzf.vim
@@ -78,6 +78,9 @@ call plug#begin()
   source ~/.config/nvim/plugins/lightline.vim
   source ~/.config/nvim/plugins/vim_livedown.vim
   source ~/.config/nvim/plugins/lspconfig.vim
+  source ~/.config/nvim/plugins/nvim_cmp.vim
+  source ~/.config/nvim/plugins/lspsaga.vim
+  source ~/.config/nvim/plugins/luasnip.vim
   source ~/.config/nvim/plugins/pasta.vim
   source ~/.config/nvim/plugins/nerdtree.vim
   source ~/.config/nvim/plugins/rhubarb.vim
@@ -92,3 +95,4 @@ call plug#end()
 doautocmd User PlugLoaded
 
 "--------------------------------------------------------------------------
+colorscheme kbyrne
