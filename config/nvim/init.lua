@@ -66,7 +66,7 @@ vim.cmd([[
   source ~/.config/nvim/plugins/treesitter.vim
 ]])
 
-vim.cmd[[colorscheme tokyonight]]
+vim.cmd[[colorscheme kanagawa-dragon]]
 
 vim.cmd([[
 let g:lightline = {
