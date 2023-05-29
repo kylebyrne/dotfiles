@@ -1,5 +1,3 @@
-Plug 'scrooloose/nerdtree'
-
 nnoremap <expr> <leader>n g:NERDTree.IsOpen() ? ':NERDTreeClose<CR>' : @% == '' ? ':NERDTree<CR>' : ':NERDTreeFind<CR>'
 
 let NERDTreeIgnore=['\.DS_Store', '\~$', '\.swp']

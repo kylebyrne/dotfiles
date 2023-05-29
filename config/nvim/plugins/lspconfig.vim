@@ -1,5 +1,3 @@
-Plug 'neovim/nvim-lspconfig'
-Plug 'mihyaeru21/nvim-lspconfig-bundler'
 
 function LSPSetup()
 set completeopt=menuone,noinsert,noselect
