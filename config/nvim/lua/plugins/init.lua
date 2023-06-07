@@ -1,5 +1,11 @@
 return {
-  "mileszs/ack.vim",
+  {
+    "mileszs/ack.vim",
+    lazy=false,
+    keys = {
+      { "<leader>f", ":Ack ''<left>"},
+    },
+  },
   "tpope/vim-commentary",
   "tpope/vim-endwise",
   "tpope/vim-fugitive",

@@ -15,9 +15,11 @@ vim.opt.wrap = false
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.scrolloff = 8
-vim.wo.relativenumber = true
+vim.opt.number = true
+vim.opt.relativenumber = true
 
 vim.g.mapleader = ' '
+vim.g.ackprg = 'rg --vimgrep --no-heading'
 
 -- Trigger git coauthor input with :Gca
 vim.api.nvim_create_user_command('Gca',
@@ -60,11 +62,11 @@ require("lazy").setup("plugins")
 
 vim.cmd([[
   source ~/.config/nvim/plugins/nerdtree.vim
-  source ~/.config/nvim/plugins/lspconfig.vim
-  source ~/.config/nvim/plugins/nvim_cmp.vim
   source ~/.config/nvim/plugins/test.vim
   source ~/.config/nvim/plugins/treesitter.vim
 ]])
+  -- source ~/.config/nvim/plugins/lspconfig.vim
+  -- source ~/.config/nvim/plugins/nvim_cmp.vim
 
 vim.cmd[[colorscheme kanagawa-dragon]]
 
@@ -72,4 +74,12 @@ vim.cmd([[
 let g:lightline = {
       \ 'colorscheme': 'wombat',
       \ }
+]])
+
+vim.cmd([[
+set cursorline
+hi cursorline cterm=none term=none
+autocmd WinEnter * setlocal cursorline
+autocmd WinLeave * setlocal nocursorline
+highlight CursorLine guibg=#303000 ctermbg=234
 ]])
