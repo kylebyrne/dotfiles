@@ -3,7 +3,7 @@ return {
     "mileszs/ack.vim",
     lazy=false,
     keys = {
-      { "<leader>f", ":Ack ''<left>"},
+      { "<leader>fw", ":Ack ''<left>"},
     },
   },
   "tpope/vim-commentary",
@@ -47,5 +47,10 @@ return {
   'nvim-treesitter/playground',
 
   --vimux
-  'benmills/vimux'
+  'benmills/vimux',
+  {
+    "chrisgrieser/nvim-early-retirement",
+    config = true,
+    event = "VeryLazy",
+  },
 }

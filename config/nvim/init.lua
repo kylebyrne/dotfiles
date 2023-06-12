@@ -3,14 +3,14 @@ vim.opt.showmode = false
 vim.opt.swapfile = false
 vim.opt.splitright = true
 vim.opt.splitbelow = true
-vim.opt.hidden=true
-vim.opt.termguicolors=true
-vim.opt.tabstop=2
-vim.opt.softtabstop=2
-vim.opt.shiftwidth=2
+vim.opt.hidden = true
+vim.opt.termguicolors = true
+vim.opt.tabstop = 2
+vim.opt.softtabstop = 2
+vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
 vim.opt.copyindent = true
-vim.opt.smartindent =true
+vim.opt.smartindent = true
 vim.opt.wrap = false
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
@@ -23,10 +23,11 @@ vim.g.ackprg = 'rg --vimgrep --no-heading'
 
 -- Trigger git coauthor input with :Gca
 vim.api.nvim_create_user_command('Gca',
-function(opts)
-  vim.cmd([[r!git log -n500 --pretty=format:"\%an <\%ae>" | grep -i ']]..opts.fargs[1]..[['| head -1 | xargs echo "Co-authored-by:"]])
-end,
-{ nargs = 1 }
+  function(opts)
+    vim.cmd([[r!git log -n500 --pretty=format:"\%an <\%ae>" | grep -i ']] ..
+      opts.fargs[1] .. [['| head -1 | xargs echo "Co-authored-by:"]])
+  end,
+  { nargs = 1 }
 )
 
 ---- Shortcut to yank current file path
@@ -65,21 +66,22 @@ vim.cmd([[
   source ~/.config/nvim/plugins/test.vim
   source ~/.config/nvim/plugins/treesitter.vim
 ]])
-  -- source ~/.config/nvim/plugins/lspconfig.vim
-  -- source ~/.config/nvim/plugins/nvim_cmp.vim
+-- source ~/.config/nvim/plugins/lspconfig.vim
+-- source ~/.config/nvim/plugins/nvim_cmp.vim
 
-vim.cmd[[colorscheme kanagawa-dragon]]
 
-vim.cmd([[
-let g:lightline = {
-      \ 'colorscheme': 'wombat',
-      \ }
-]])
+-- vim.cmd([[
+-- let g:lightline = {
+--       \ 'colorscheme': 'wombat',
+--       \ }
+-- ]])
 
-vim.cmd([[
-set cursorline
-hi cursorline cterm=none term=none
-autocmd WinEnter * setlocal cursorline
-autocmd WinLeave * setlocal nocursorline
-highlight CursorLine guibg=#303000 ctermbg=234
-]])
+-- vim.cmd([[
+-- set cursorline
+-- hi cursorline cterm=none term=none
+-- autocmd WinEnter * setlocal cursorline
+-- autocmd WinLeave * setlocal nocursorline
+-- highlight CursorLine guibg=#303000 ctermbg=234
+-- ]])
+
+
